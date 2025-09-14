@@ -10,10 +10,10 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
 
 ## Dados do Aluno
 
-- **Nome completo:** [Preencher aqui]
-- **Matrícula:** [Preencher aqui]
-- **Curso:** [Preencher aqui]
-- **Turma:** [Preencher aqui]
+- **Nome completo:** Nicolas Thomé Zanin
+- **Matrícula:** 251027076
+- **Curso:** Engenharias/FCTE
+- **Turma:** Turma 6
 
 ---
 
@@ -62,7 +62,7 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
 
 ## Contato
 
-- [Opcional: E-mail pessoal do aluno.]
+- Email: nicolaszanin2006@gmail.com
 
 ---
 
