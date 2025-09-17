@@ -29,7 +29,7 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
    [Descrever aqui as principais pastas do projeto]
 
 3. **Versão do JAVA utilizada:**  
-   [Descrever aqui como versão do JAVA utilizada no projeto. Sugestão: `java 21`]
+   Java 24
 
 ---
 
