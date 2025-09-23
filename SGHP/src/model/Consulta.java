@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.enums.StatusConsulta;
@@ -26,8 +27,8 @@ public class Consulta {
         this.local = local;
         this.motivo = motivo;
         this.status = StatusConsulta.AGENDADA; // Toda consulta começa como agendada
-            this.diagnostico = "";
-            this.prescricoes = null;
+        this.diagnostico = "";
+        this.prescricoes = new ArrayList<>();
         }
 
 
