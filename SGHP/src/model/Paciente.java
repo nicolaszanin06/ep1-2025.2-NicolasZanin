@@ -18,7 +18,9 @@ public class Paciente extends Pessoa {
     public void adicionarConsulta(Consulta consulta) {
         this.historicoConsultas.add(consulta);
     }
-    
+    public double custoDaConsulta(Medico medico) {
+        return medico.getCustoConsulta(); // Paciente comum nn tem desconto
+    }
     @Override
     public String toString() {
         return "Paciente:" + super.toString();
