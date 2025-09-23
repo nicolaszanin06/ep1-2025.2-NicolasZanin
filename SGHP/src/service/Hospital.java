@@ -1,4 +1,4 @@
-package sistema;
+package service;
 
 public class Hospital {
 

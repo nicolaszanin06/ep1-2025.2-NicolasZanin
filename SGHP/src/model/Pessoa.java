@@ -1,4 +1,4 @@
-package entidades;
+package model;
 
 public abstract class Pessoa {
     private String nome;
@@ -11,6 +11,17 @@ public abstract class Pessoa {
         this.idade = idade;
         this.telefone = telefone;
         this.cpf = cpf;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
+    public int getIdade() {
+        return idade;
     }
 
 

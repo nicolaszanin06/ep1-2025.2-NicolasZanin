@@ -1,4 +1,4 @@
-package entidades;
+package model;
 
 public class Medico extends Pessoa {
     private String crm;
@@ -10,6 +10,8 @@ public class Medico extends Pessoa {
         this.crm = crm;
         this.especialidade = especialidade;
         this.custoConsulta = custoConsulta;
+
+    
     }
 
 }

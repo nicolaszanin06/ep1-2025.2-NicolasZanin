@@ -1,4 +1,4 @@
-package visual;
+package view;
 
 public class Menu {
 

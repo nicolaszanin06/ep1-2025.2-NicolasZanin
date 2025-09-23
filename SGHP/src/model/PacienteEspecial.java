@@ -1,4 +1,4 @@
-package entidades;
+package model;
 
 public class PacienteEspecial extends Paciente {
     public String planoSaude;
