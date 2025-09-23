@@ -11,7 +11,7 @@ public class Main {
         Thread.sleep(800);
         System.out.print(".");
         Thread.sleep(800);
-        System.out.print("");
+        System.out.println("");
 
         Thread.sleep(2000);
         new Menu();
