@@ -17,8 +17,7 @@ public class PacienteEspecial extends Paciente {
         return "Paciente Especial: " + super.toString() + ", Plano de Saúde: " + planoSaude;
     }
     public double custoDaConsulta(Medico medico) {
-        double desconto = planoSaude.getDesconto();
-        return (medico.getCustoConsulta() * (1 - desconto)); //Sobreescrita do código vindo do Paciente
+        return (medico.getCustoConsulta() * (1 - planoSaude.getDesconto())); //Sobreescrita do código vindo do Paciente
     }
 
 }
