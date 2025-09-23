@@ -1,17 +1,16 @@
 package model;
 
-public class PacienteEspecial extends Paciente {
-    private String planoSaude;
+import model.enums.PlanoDeSaude;
 
-    public PacienteEspecial(String nome, int idade, String telefone, String cpf, String planoSaude) {
+public class PacienteEspecial extends Paciente {
+    private PlanoDeSaude planoSaude;
+
+    public PacienteEspecial(String nome, int idade, String telefone, String cpf, PlanoDeSaude planoSaude) {
         super(nome, idade, cpf);
         this.planoSaude = planoSaude;
     }
-    public String getPlanoSaude() {
+    public PlanoDeSaude getPlanoSaude() {
         return planoSaude;
-    }
-    public void setPlanoSaude(String planoSaude) {
-        this.planoSaude = planoSaude;
     }
     @Override
     public String toString() {
