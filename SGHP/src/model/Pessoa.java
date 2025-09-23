@@ -3,13 +3,11 @@ package model;
 public abstract class Pessoa {
     private String nome;
     private int idade;
-    private String telefone;
     private String cpf;
 
-    public Pessoa(String nome, int idade, String telefone, String cpf) {
+    public Pessoa(String nome, int idade, String cpf) {
         this.nome = nome;
         this.idade = idade;
-        this.telefone = telefone;
         this.cpf = cpf;
     }
 
@@ -24,6 +22,10 @@ public abstract class Pessoa {
         return idade;
     }
 
+    @Override
+    public String toString() {
+        return "Nome: " + nome + ", Idade: " + idade + ", CPF: " + cpf;
+    }
 
 
 }
