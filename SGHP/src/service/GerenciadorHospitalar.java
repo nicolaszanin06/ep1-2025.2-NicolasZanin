@@ -1,22 +1,22 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.List;
 import model.Paciente;
 import model.Medico;
 import model.Consulta;
-import model.PacienteEspecial;
 
 public class GerenciadorHospitalar {
     private List<Paciente> pacientes;
     private List<Medico> medicos;
     private List<Consulta> consultas;
-    private List<PacienteEspecial> pacientesEspeciais;
 
-    public GerenciadorHospitalar(List<Paciente> pacientes, List<Medico> medicos, List<Consulta> consultas, List<PacienteEspecial> pacientesEspeciais) {
-        this.pacientes = pacientes;
-        this.medicos = medicos;
-        this.consultas = consultas;
-        this.pacientesEspeciais = pacientesEspeciais;
+
+    public GerenciadorHospitalar(List<Paciente> pacientes, List<Medico> medicos, List<Consulta> consultas) {
+        this.pacientes = new ArrayList<>();
+        this.medicos = new ArrayList<>();
+        this.consultas = new ArrayList<>();
+
     }
 
     public void cadastrarPaciente(Paciente paciente) {
@@ -28,13 +28,14 @@ public class GerenciadorHospitalar {
         medicos.add(medico);
         System.out.println("Médico cadastrado com sucesso: " + medico.getNome());
     }
-    public void cadastrarConsulta(Consulta consulta) {
+    public void agendarConsulta(Consulta consulta) {
+        for (Consulta c : consultas) {
+            if (c.getMedico().equals(consulta.getMedico()) && c.getDataHora().equals(consulta.getDataHora())) {
+                System.out.println("ERRO: O médico " + consulta.getMedico().getNome() + " já possui uma consulta neste horário.");
+                return;
+            }
+        }
         consultas.add(consulta);
-        System.out.println("Consulta cadastrada com sucesso para o paciente: " + consulta.getPaciente().getNome());
+        System.out.println("Consulta agendada com sucesso para o paciente: " + consulta.getPaciente().getNome() + " com o médico: " + consulta.getMedico().getNome() + " na data e hora: " + consulta.getDataHora());
     }
-    public void cadastrarPacienteEspecial(PacienteEspecial pacienteEspecial) {
-        pacientesEspeciais.add(pacienteEspecial);
-        System.out.println("Paciente especial cadastrado com sucesso: " + pacienteEspecial.getNome());
-    }
-    
 }
