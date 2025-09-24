@@ -10,6 +10,12 @@ public class GerenciadorHospitalar {
     private List<Medico> medicos;
     private List<Consulta> consultas;
 
+    
+    public GerenciadorHospitalar() {
+        this.pacientes = new java.util.ArrayList<>();
+        this.medicos = new java.util.ArrayList<>();
+        this.consultas = new java.util.ArrayList<>();
+    }
 
     public GerenciadorHospitalar(List<Paciente> pacientes, List<Medico> medicos, List<Consulta> consultas) {
         this.pacientes = pacientes;

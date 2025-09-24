@@ -9,10 +9,13 @@ import model.Medico;
 import model.Paciente;
 import service.GerenciadorHospitalar;
 public class MenuConsulta {
-    Scanner sc = new Scanner(System.in);
-    private GerenciadorHospitalar gr;
+    private Scanner sc;
+    private GerenciadorHospitalar gh;
     
-    public MenuConsulta() throws InterruptedException {
+    public MenuConsulta(Scanner sc, GerenciadorHospitalar gh) throws InterruptedException {
+        this.sc = sc;
+        this.gh = gh;
+
         System.out.println("");
         System.out.println("------ Menu Consultas ------");
         System.out.println("1. Agendar Consulta");
@@ -38,7 +41,7 @@ public class MenuConsulta {
             case 4:
             //implementar retorno ao menu principal
                 System.out.println("Voltando ao menu principal...");
-                new Menu();
+                new Menu(sc, gh);
                 break;
             default:
                 System.out.println("Opção inválida!");
@@ -67,12 +70,12 @@ public class MenuConsulta {
         sc.close();
         // Verificar se o paciente existe
 
-        Paciente paciente = gr.buscarPacientePorCPF(cpfPaciente);
+        Paciente paciente = gh.buscarPacientePorCPF(cpfPaciente);
         if (paciente == null) {
             System.out.println("Paciente não encontrado com o CPF: " + cpfPaciente);
             return;
         }
-        Medico medico = gr.buscarMedicoPorCRM(crmMedico);
+        Medico medico = gh.buscarMedicoPorCRM(crmMedico);
         if (medico == null) {
             System.out.println("Médico não encontrado com o CRM: " + crmMedico);
             return;
@@ -90,7 +93,7 @@ public class MenuConsulta {
         }
 
         Consulta consulta = new Consulta(paciente, medico, dataHora, local, motivo);
-        gr.agendarConsulta(consulta);
+        gh.agendarConsulta(consulta);
         
             
         throw new UnsupportedOperationException("Unimplemented method 'agendarNovaConsulta'");

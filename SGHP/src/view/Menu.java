@@ -1,11 +1,16 @@
 package view;
 
 import java.util.Scanner;
+import service.GerenciadorHospitalar;
 
 public class Menu {
-    Scanner sc = new Scanner(System.in);
+    private Scanner sc = new Scanner(System.in);
+    private GerenciadorHospitalar gh;
 
-    public Menu() throws InterruptedException {
+    public Menu(Scanner sc, GerenciadorHospitalar gh) throws InterruptedException {
+        this.sc = sc;
+        this.gh = gh;
+
         System.out.println("");
         System.out.println("------ Menu Principal ------");
         System.out.println("1. Gerenciar Pacientes");
@@ -17,13 +22,13 @@ public class Menu {
         int opcao = sc.nextInt();
         switch (opcao) {
             case 1:
-                new MenuPaciente();
+                new MenuPaciente(sc, gh);
                 break;
             case 2:
-                new MenuMedico();
+                new MenuMedico(sc, gh);
                 break;
             case 3:
-                new MenuConsulta();
+                new MenuConsulta(sc, gh);
                 break;
             case 4:
                 System.out.println("Salvando alterações e saindo...");
@@ -32,7 +37,7 @@ public class Menu {
                 System.out.println("");
                 System.out.println("Opção inválida!");
                 Thread.sleep(1000);
-                new Menu();
+                new Menu(sc, gh);
 
         }
     }
