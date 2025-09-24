@@ -1,6 +1,5 @@
 package service;
 
-import java.util.ArrayList;
 import java.util.List;
 import model.Paciente;
 import model.Medico;
@@ -13,10 +12,9 @@ public class GerenciadorHospitalar {
 
 
     public GerenciadorHospitalar(List<Paciente> pacientes, List<Medico> medicos, List<Consulta> consultas) {
-        this.pacientes = new ArrayList<>();
-        this.medicos = new ArrayList<>();
-        this.consultas = new ArrayList<>();
-
+        this.pacientes = pacientes;
+        this.medicos = medicos;
+        this.consultas = consultas;
     }
 
     public void cadastrarPaciente(Paciente paciente) {
@@ -36,6 +34,26 @@ public class GerenciadorHospitalar {
             }
         }
         consultas.add(consulta);
-        System.out.println("Consulta agendada com sucesso para o paciente: " + consulta.getPaciente().getNome() + " com o médico: " + consulta.getMedico().getNome() + " na data e hora: " + consulta.getDataHora());
+        System.out.println("Consulta agendada com sucesso para o paciente " + consulta.getPaciente().getNome() +
+                " com o médico " + consulta.getMedico().getNome() + " em " + consulta.getDataHora());
     }
-}
+
+    public Paciente buscarPacientePorCPF(String cpf) {
+                for (Paciente p : pacientes) {
+                    if (p.getCpf().equals(cpf)) {
+                        return p;
+                    }
+                }
+                return null;
+            }
+    public Medico buscarMedicoPorCRM(String crm) {
+                for (Medico m : medicos) {
+                    if (m.getCrm().equals(crm)) {
+                        return m;
+                    }
+                }
+                return null;
+            }
+        }
+        
+

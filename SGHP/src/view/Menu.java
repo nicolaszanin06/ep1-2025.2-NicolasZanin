@@ -5,13 +5,15 @@ import java.util.Scanner;
 public class Menu {
     Scanner sc = new Scanner(System.in);
 
-    public Menu() {
+    public Menu() throws InterruptedException {
+        System.out.println("");
         System.out.println("------ Menu Principal ------");
         System.out.println("1. Gerenciar Pacientes");
         System.out.println("2. Gerenciar Médicos");
         System.out.println("3. Gerenciar Consultas");
         System.out.println("4. Sair");
-        System.out.print("Escolha uma opção: ");
+         System.out.println("---------------------------");
+        System.out.print("> Escolha uma opção: ");
         int opcao = sc.nextInt();
         switch (opcao) {
             case 1:
@@ -27,8 +29,10 @@ public class Menu {
                 System.out.println("Salvando alterações e saindo...");
                 break;
             default:
+                System.out.println("");
                 System.out.println("Opção inválida!");
-                break;
+                Thread.sleep(1000);
+                new Menu();
 
         }
     }
