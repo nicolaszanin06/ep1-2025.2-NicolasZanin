@@ -30,4 +30,7 @@ public class Medico extends Pessoa {
     public void setCustoConsulta(int custoConsulta) {
         this.custoConsulta = custoConsulta;
     }
+    public String toString() {
+        return "Médico: " + super.toString() + ", CRM: " + crm + ", Especialidade: " + especialidade + ", Custo da Consulta: R$" + custoConsulta;
+    }
 }
