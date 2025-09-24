@@ -71,11 +71,20 @@ public class Consulta {
     public StatusConsulta getStatus() {
         return status;
     }
+    public void setStatus(StatusConsulta status) {
+        this.status = status;
+    }
     public String getDiagnostico() {
         return diagnostico;
     }
+    public void setDiagnostico(String diagnostico) {
+        this.diagnostico = diagnostico;
+    }
     public List<String> getPrescricoes() {
         return prescricoes;
+    }
+    public void setPrescricoes(List<String> prescricoes) {
+        this.prescricoes = prescricoes;
     }
 
 
