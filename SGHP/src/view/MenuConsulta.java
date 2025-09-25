@@ -30,14 +30,17 @@ public class MenuConsulta {
 
         switch (opcao) {
             case 1:
+                agendarConsulta();
                 break;
             case 2:
-                System.out.println("Listando consultas...");
+                listarConsultas();
                 break;
             case 3:
+                concluirConsulta();
                 System.out.println("Consulta concluída com sucesso!");
                 break;
             case 4:
+                cancelarConsulta();
                 System.out.println("Consulta cancelada com sucesso!");
                 break;
             case 5:
