@@ -25,6 +25,7 @@ public class MenuMedico {
             case 1:
                 break;
             case 2:
+                System.out.println("Listando médicos...");
                 break;
             case 3:
                 break;

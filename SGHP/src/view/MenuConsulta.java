@@ -112,7 +112,7 @@ public class MenuConsulta {
             System.out.print("> Insira o ID da consulta a ser concluída: ");
             int idConsulta = sc.nextInt();
             sc.nextLine(); 
-            Consulta consulta = gh.buscarConsultaPorId(idConsulta);
+            Consulta consulta = gh.getConsultaByIndex(idConsulta);
             if (consulta == null) {
                 System.out.println("Consulta não encontrada com o ID: " + idConsulta);
                 return;
@@ -136,7 +136,7 @@ public class MenuConsulta {
             System.out.print("> Insira o ID da consulta a ser cancelada: ");
             int idConsulta = sc.nextInt();
             sc.nextLine(); 
-            Consulta consulta = gh.buscarConsultaPorId(idConsulta);
+            Consulta consulta = gh.getConsultaByIndex(idConsulta);
             if (consulta == null) {
                 System.out.println("Consulta não encontrada com o ID: " + idConsulta);
                 return;

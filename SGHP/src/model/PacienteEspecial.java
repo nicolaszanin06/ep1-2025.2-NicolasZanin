@@ -5,7 +5,7 @@ import model.enums.PlanoDeSaude;
 public class PacienteEspecial extends Paciente {
     private PlanoDeSaude planoSaude;
 
-    public PacienteEspecial(String nome, int idade, String telefone, String cpf, PlanoDeSaude planoSaude) {
+    public PacienteEspecial(String nome, int idade, String cpf, PlanoDeSaude planoSaude) {
         super(nome, idade, cpf);
         this.planoSaude = planoSaude;
     }

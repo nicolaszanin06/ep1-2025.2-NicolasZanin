@@ -1,7 +1,11 @@
 package view;
 
+import java.util.List;
 import java.util.Scanner;
 
+import model.Paciente;
+import model.PacienteEspecial;
+import model.enums.PlanoDeSaude;
 import service.GerenciadorHospitalar;
 
 public class MenuPaciente {
@@ -24,13 +28,34 @@ public class MenuPaciente {
 
         switch (opcao) {
             case 1:
-                gh.cadastrarMedico(null);
+                System.out.println();
+                System.out.println("------ Cadastrar Paciente ------");
+                System.out.println("1. Paciente Comum");
+                System.out.println("2. Paciente Convênio");
+                System.out.println("3. Voltar");
+                System.out.println("-------------------------------");
+                System.out.print("> Escolha uma opção: ");
+                int tipoPaciente = sc.nextInt();
+                switch (tipoPaciente) {
+                    case 1:
+                        cadastrarPacienteComum();
+                        break;
+                    case 2:
+                        cadastrarPacienteEspecial();
+                        break;
+                    case 3:
+                        new MenuPaciente(sc, gh);
+                        break;
+                    default:
+                        System.out.println("Opção inválida!");
+                        break;
+                }
                 break;
             case 2:
-                System.out.println("Listando pacientes...");
+                listarPacientes();
                 break;
             case 3:
-                System.out.println("Removendo paciente...");
+                removerPaciente();
                 break;
             case 4:
                 System.out.println("Voltando ao menu principal...");
@@ -39,6 +64,69 @@ public class MenuPaciente {
             default:
                 System.out.println("Opção inválida!");
                 break;
+        }
+    }
+    private void cadastrarPacienteComum() {
+        System.out.println("\n--- Cadastrar Paciente Comum ---");
+        sc.nextLine();
+        System.out.print("> Nome: ");
+        String nome = sc.nextLine();
+        System.out.print("> Idade: ");
+        int idade = sc.nextInt();
+        System.out.print("> CPF: ");
+        sc.nextLine();
+        String cpf = sc.nextLine();
+        Paciente novoPaciente = new Paciente(nome, idade, cpf);
+        gh.cadastrarPaciente(novoPaciente);
+        }
+    private void cadastrarPacienteEspecial() {
+        System.out.println("\n--- Cadastrar Paciente Convênio ---");
+        sc.nextLine();
+        System.out.print("> Nome: ");
+        String nome = sc.nextLine();
+        System.out.print("> Idade: ");
+        int idade = sc.nextInt();
+        System.out.print("> CPF: ");
+        sc.nextLine();
+        String cpf = sc.nextLine();
+        
+        System.out.println("--- Planos de Saúdes válidos ---");
+        for (PlanoDeSaude plano : PlanoDeSaude.values()) {
+            System.out.println(plano.getCodigo() + ". " + plano.getNome() + " (Desconto: " + (plano.getDesconto() * 100) + "%)");
+        }
+        System.out.print("> Escolha o código do plano de saúde: ");
+        int codigoPlano = sc.nextInt();
+        PlanoDeSaude planoEscolhido = PlanoDeSaude.getPorCodigo(codigoPlano);
+
+        if (planoEscolhido == null) {
+            System.out.println("Código de plano inválido. Cadastro cancelado.");
+        }
+        PacienteEspecial novoPacienteEspecial = new PacienteEspecial(nome, idade, cpf, planoEscolhido);
+        gh.cadastrarPaciente(novoPacienteEspecial);
+
+
+        }
+    private void listarPacientes() {
+        System.out.println("--- Lista de Pacientes ---");
+        List<model.Paciente> pacientes = gh.getPacientes();
+        if (pacientes.isEmpty()) {
+            System.out.println("Nenhum paciente cadastrado.");
+        } else {
+            for (model.Paciente p : pacientes) {
+                System.out.println(p);
+            }
+        }
+    }
+    private void removerPaciente() {
+        System.out.println("\n--- Remover Paciente ---");
+        sc.nextLine();
+        System.out.print("> Informe o CPF do paciente a ser removido: ");
+        String cpf = sc.nextLine();
+        boolean removido = gh.removerPaciente(cpf);
+        if (removido) {
+            System.out.println("Paciente removido com sucesso!");
+        } else {
+            System.out.println("Paciente não encontrado.");
         }
     }
 }
