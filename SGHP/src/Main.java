@@ -5,7 +5,6 @@ import view.Menu;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-
         Scanner sc = new Scanner(System.in);
         GerenciadorHospitalar gh = new GerenciadorHospitalar();
         {

@@ -29,18 +29,14 @@ public class MenuConsulta {
 
         switch (opcao) {
             case 1:
-                agendarNovaConsulta();
                 break;
             case 2:
-                listarConsultas();
                 System.out.println("Listando consultas...");
                 break;
             case 3:
-                realizarConsulta();
                 System.out.println("Consulta concluída com sucesso!");
                 break;
             case 4:
-                cancelarConsulta();
                 System.out.println("Consulta cancelada com sucesso!");
                 break;
             case 5:
@@ -72,6 +68,7 @@ public class MenuConsulta {
         System.out.println(">Insira o motivo da consulta: ");
             String motivo = sc.nextLine();
         sc.close();
+        
         // Verificar se o paciente existe
 
         Paciente paciente = gh.buscarPacientePorCPF(cpfPaciente);
@@ -100,12 +97,5 @@ public class MenuConsulta {
         
             
         throw new UnsupportedOperationException("Unimplemented method 'agendarNovaConsulta'");
-    }
-
-    private void realizarConsulta() {
-    }
-    private void listarConsultas() {
-    }
-    private void cancelarConsulta() {
     }
 }
