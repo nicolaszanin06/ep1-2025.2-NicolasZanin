@@ -37,11 +37,9 @@ public class MenuConsulta {
                 break;
             case 3:
                 concluirConsulta();
-                System.out.println("Consulta concluída com sucesso!");
                 break;
             case 4:
                 cancelarConsulta();
-                System.out.println("Consulta cancelada com sucesso!");
                 break;
             case 5:
                 System.out.println("Voltando ao menu principal...");
@@ -57,6 +55,7 @@ public class MenuConsulta {
         private void agendarConsulta() {
             System.out.println("--- Agendar Consulta ---");
             System.out.print("> Insira o CPF do paciente: ");
+            sc.nextLine();
             String cpfPaciente = sc.nextLine();
             Paciente paciente = gh.buscarPacientePorCPF(cpfPaciente);
             if (paciente == null) {

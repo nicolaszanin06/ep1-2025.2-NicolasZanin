@@ -25,13 +25,10 @@ public class MenuMedico {
             case 1:
                 break;
             case 2:
-                System.out.println("Listando médicos...");
                 break;
             case 3:
-                System.out.println("Removendo médico...");
                 break;
             case 4:
-                System.out.println("Voltando ao menu principal...");
                 new Menu(sc, gh);
                 break;
             default:
