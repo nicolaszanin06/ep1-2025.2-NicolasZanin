@@ -178,6 +178,12 @@ public class GerenciadorHospitalar {
         return false;
     }
 
+
+    public Consulta buscarConsultaPorId(int idConsulta) {
+
+        throw new UnsupportedOperationException("Unimplemented method 'buscarConsultaPorId'");
+    }
+
         
 
 }
