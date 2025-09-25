@@ -20,8 +20,9 @@ public class MenuConsulta {
         System.out.println("------ Menu Consultas ------");
         System.out.println("1. Agendar Consulta");
         System.out.println("2. Listar Consultas");
-        System.out.println("3. Cancelar Consulta");
-        System.out.println("4. Voltar ao Menu Principal");
+        System.out.println("3. Concluir Consulta");
+        System.out.println("4. Cancelar Consulta");
+        System.out.println("5. Voltar ao Menu Principal");
         System.out.println("----------------------------");
         System.out.print("> Escolha uma opção: ");
         int opcao = sc.nextInt();
@@ -31,15 +32,18 @@ public class MenuConsulta {
                 agendarNovaConsulta();
                 break;
             case 2:
-            //implementar listagem de consultas
+                listarConsultas();
                 System.out.println("Listando consultas...");
                 break;
             case 3:
-            //implementar cancelamento de consulta
-                System.out.println("Consulta cancelada com sucesso!");
+                realizarConsulta();
+                System.out.println("Consulta concluída com sucesso!");
                 break;
             case 4:
-            //implementar retorno ao menu principal
+                cancelarConsulta();
+                System.out.println("Consulta cancelada com sucesso!");
+                break;
+            case 5:
                 System.out.println("Voltando ao menu principal...");
                 new Menu(sc, gh);
                 break;
@@ -52,7 +56,7 @@ public class MenuConsulta {
 
 
 // Código interno do menu
-
+    //Código para agendar nova consulta
     private void agendarNovaConsulta() {
         sc.nextLine();
         System.out.println("");
@@ -80,7 +84,6 @@ public class MenuConsulta {
             System.out.println("Médico não encontrado com o CRM: " + crmMedico);
             return;
         }
-        // Coleta de dados
         LocalDateTime dataHora = null;
         boolean dataValida = false;
         while (!dataValida) {
@@ -98,5 +101,11 @@ public class MenuConsulta {
             
         throw new UnsupportedOperationException("Unimplemented method 'agendarNovaConsulta'");
     }
-    }
 
+    private void realizarConsulta() {
+    }
+    private void listarConsultas() {
+    }
+    private void cancelarConsulta() {
+    }
+}
