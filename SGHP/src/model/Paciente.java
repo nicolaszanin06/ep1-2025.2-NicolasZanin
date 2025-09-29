@@ -23,6 +23,6 @@ public class Paciente extends Pessoa {
     }
     @Override
     public String toString() {
-        return "Paciente:" + super.toString();
+        return super.toString();
     }
 }
