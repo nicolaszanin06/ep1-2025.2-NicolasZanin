@@ -192,15 +192,11 @@ public class GerenciadorHospitalar {
         }
         System.out.println("O quarto " + numeroQuarto + " está disponível para internação.");
     }
-    public Internacao internarPaciente(Paciente p, Medico m, LocalDateTime entrada, LocalDateTime saida, int quarto, double custo) {
-    Internacao nova = new Internacao(p, m, entrada, saida, quarto, custo);
-    internacoes.add(nova);
-    return nova;
 }
 
         
 
-}
+
 
         
 
