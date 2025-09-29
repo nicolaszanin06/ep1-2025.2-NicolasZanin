@@ -143,15 +143,12 @@ public class MenuPaciente {
 
     private void removerPaciente() {
         System.out.println("\n--- Remover Paciente ---");
-        sc.nextLine();
         System.out.print("> Informe o CPF do paciente a ser removido: ");
         String cpf = sc.nextLine();
         boolean removido = gh.removerPaciente(cpf);
         if (removido) {
-            System.out.println("Paciente removido com sucesso!");
         } else {
             System.out.println("Paciente não encontrado.");
         }
     }
-    
 }
