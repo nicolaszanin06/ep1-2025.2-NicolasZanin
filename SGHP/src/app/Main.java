@@ -10,23 +10,21 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         GerenciadorHospitalar gh = new GerenciadorHospitalar();
         {
-        System.out.println("Bem-vindo(a) ao sistema de Gerenciamento Hospitalar!");
-        System.out.print("Carregando o menu. \nAguarde");
-        //Animação de Loading
-        Thread.sleep(700);
-        System.out.print(".");
-        Thread.sleep(700);
-        System.out.print(".");
-        Thread.sleep(700);
-        System.out.println(".");
+            System.out.println("Bem-vindo(a) ao sistema de Gerenciamento Hospitalar!");
+            System.out.print("Carregando o menu. \nAguarde");
+            // Animação de Loading
+            Thread.sleep(700);
+            System.out.print(".");
+            Thread.sleep(700);
+            System.out.print(".");
+            Thread.sleep(700);
+            System.out.println(".");
 
-        Thread.sleep(1000);
-        Menu menu = new Menu(sc, gh);
-        menu.exibirMenu();
-        
+            Thread.sleep(1000);
+            Menu menu = new Menu(sc, gh);
+            menu.exibirMenu();
 
-            }
-    sc.close();
         }
+        sc.close();
     }
-
+}

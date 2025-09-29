@@ -22,12 +22,15 @@ public enum PlanoDeSaude {
     public String getNome() {
         return nome;
     }
+
     public int getCodigo() {
         return codigo;
     }
+
     public double getDesconto() {
         return desconto;
     }
+
     public static PlanoDeSaude getPorCodigo(int codigo) {
         for (PlanoDeSaude cdd : PlanoDeSaude.values()) {
             if (cdd.getCodigo() == codigo) {

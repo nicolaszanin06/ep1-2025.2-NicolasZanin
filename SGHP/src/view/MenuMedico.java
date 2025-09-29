@@ -10,10 +10,10 @@ public class MenuMedico {
     public MenuMedico(Scanner sc, GerenciadorHospitalar gh) throws InterruptedException {
         this.sc = sc;
         this.gh = gh;
-        }
+    }
 
     public void exibirMenu() throws InterruptedException {
-       boolean rodando = true;
+        boolean rodando = true;
         while (rodando) {
             System.out.println("");
             System.out.println("------ Menu Médicos ------");

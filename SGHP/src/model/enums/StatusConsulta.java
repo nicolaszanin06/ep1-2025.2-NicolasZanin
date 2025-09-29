@@ -10,10 +10,9 @@ public enum StatusConsulta {
     StatusConsulta(String statusFormatado) {
         this.statusFormatado = statusFormatado;
     }
+
     public String getStatusFormatado() {
         return statusFormatado;
     }
-
-
 
 }

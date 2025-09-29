@@ -11,7 +11,8 @@ public class Internacao {
     private double custoDiario;
     private boolean cancelada;
 
-    public Internacao(Paciente paciente, Medico medico, LocalDateTime dataInternacao, LocalDateTime dataAlta, int numeroQuarto, double custoDiario) {
+    public Internacao(Paciente paciente, Medico medico, LocalDateTime dataInternacao, LocalDateTime dataAlta,
+            int numeroQuarto, double custoDiario) {
         this.paciente = paciente;
         this.medico = medico;
         this.dataInternacao = dataInternacao;
@@ -20,10 +21,8 @@ public class Internacao {
         this.custoDiario = custoDiario;
         this.cancelada = false;
     }
-    
-    
 
-// getters e setters
+    // getters e setters
 
     public Paciente getPaciente() {
         return paciente;
@@ -48,6 +47,7 @@ public class Internacao {
     public double getCustoDiario() {
         return custoDiario;
     }
+
     public double setCustoConsulta(double custoDiario) {
         return this.custoDiario = custoDiario;
     }
@@ -58,18 +58,20 @@ public class Internacao {
 
     public void setDataAlta(LocalDateTime dataAlta) {
         this.dataAlta = dataAlta;
-    }   
+    }
 
     public void cancelarInternacao() {
         this.cancelada = true;
     }
+
     public boolean estaAtiva() {
         return !cancelada && (dataAlta == null || !dataAlta.isBefore(dataInternacao));
 
     }
+
     public long getTempoDeInternacao() {
         LocalDateTime fim = (dataAlta != null) ? dataAlta : LocalDateTime.now();
-        return java.time.Duration.between(dataInternacao, fim).toDays();    
+        return java.time.Duration.between(dataInternacao, fim).toDays();
     }
 
     @Override
@@ -85,4 +87,3 @@ public class Internacao {
                 '}';
     }
 }
-

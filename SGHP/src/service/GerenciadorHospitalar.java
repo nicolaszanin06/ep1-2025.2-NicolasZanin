@@ -22,7 +22,6 @@ public class GerenciadorHospitalar {
         this.consultas = new java.util.ArrayList<>();
         this.internacoes = new ArrayList<>();
     }
-    
 
     public GerenciadorHospitalar(List<Paciente> pacientes, List<Medico> medicos, List<Consulta> consultas) {
         this.pacientes = pacientes;
@@ -39,10 +38,12 @@ public class GerenciadorHospitalar {
         medicos.add(medico);
         System.out.println("Médico cadastrado com sucesso: " + medico.getNome());
     }
+
     public void agendarConsulta(Consulta consulta) {
         for (Consulta c : consultas) {
             if (c.getMedico().equals(consulta.getMedico()) && c.getDataHora().equals(consulta.getDataHora())) {
-                System.out.println("ERRO: O médico " + consulta.getMedico().getNome() + " já possui uma consulta neste horário.");
+                System.out.println(
+                        "ERRO: O médico " + consulta.getMedico().getNome() + " já possui uma consulta neste horário.");
                 return;
             }
         }
@@ -52,42 +53,42 @@ public class GerenciadorHospitalar {
     }
 
     public Paciente buscarPacientePorCPF(String cpf) {
-                for (Paciente p : pacientes) {
-                    if (p.getCpf().equals(cpf)) {
-                        return p;
-                    }
-                }
-                return null;
+        for (Paciente p : pacientes) {
+            if (p.getCpf().equals(cpf)) {
+                return p;
             }
+        }
+        return null;
+    }
+
     public Medico buscarMedicoPorCRM(String crm) {
-                for (Medico m : medicos) {
-                    if (m.getCrm().equals(crm)) {
-                        return m;
-                    }
-                }
-                return null;
+        for (Medico m : medicos) {
+            if (m.getCrm().equals(crm)) {
+                return m;
             }
-
-
-
+        }
+        return null;
+    }
 
     // Métodos relacionados a consultas -----------------------------------------
     public Consulta getConsultaByIndex(int index) {
         if (index >= 0 && index < consultas.size()) {
             return consultas.get(index);
-    }
+        }
         return null;
-}
+    }
+
     public boolean realizarConsulta(int index, String diagnostico, List<String> prescricoes) {
-        Consulta consulta = getConsultaByIndex(index); 
+        Consulta consulta = getConsultaByIndex(index);
         if (consulta != null && consulta.getStatus() == StatusConsulta.AGENDADA) {
             consulta.setDiagnostico(diagnostico);
             consulta.setPrescricoes(prescricoes);
             consulta.setStatus(StatusConsulta.REALIZADA);
             System.out.println("Consulta de " + consulta.getPaciente().getNome() + " realizada com sucesso.");
             return true;
-    }
-        System.out.println("Erro: Consulta não encontrada ou não pode ser realizada (status: " + (consulta != null ? consulta.getStatus() : "N/A") + ").");
+        }
+        System.out.println("Erro: Consulta não encontrada ou não pode ser realizada (status: "
+                + (consulta != null ? consulta.getStatus() : "N/A") + ").");
         return false;
     }
 
@@ -97,25 +98,27 @@ public class GerenciadorHospitalar {
             consulta.setStatus(StatusConsulta.CANCELADA);
             System.out.println("Consulta de " + consulta.getPaciente().getNome() + " cancelada com sucesso.");
             return true;
-    }
-        System.out.println("Erro: Consulta não encontrada ou não pode ser cancelada (status: " + (consulta != null ? consulta.getStatus() : "N/A") + ").");
+        }
+        System.out.println("Erro: Consulta não encontrada ou não pode ser cancelada (status: "
+                + (consulta != null ? consulta.getStatus() : "N/A") + ").");
         return false;
-}
+    }
 
-
-// Métodos para listar pacientes, médicos e consultas -----------------------------------------
+    // Métodos para listar pacientes, médicos e consultas
+    // -----------------------------------------
     public List<Paciente> getPacientes() {
         return pacientes;
     }
+
     public List<Medico> getMedicos() {
         return medicos;
     }
+
     public List<Consulta> getConsultas() {
         return consultas;
     }
 
-
-// Métodos relacionados a Pacientes -----------------------------------------
+    // Métodos relacionados a Pacientes -----------------------------------------
     public boolean atualizarPaciente(String cpf, String novoNome, int novaIdade) {
         Paciente paciente = buscarPacientePorCPF(cpf);
         if (paciente != null) {
@@ -138,6 +141,7 @@ public class GerenciadorHospitalar {
         System.out.println("Erro: Paciente com CPF " + cpf + " não encontrado.");
         return false;
     }
+
     public boolean criarPaciente(String nome, int idade, String cpf) {
         if (buscarPacientePorCPF(cpf) == null) {
             Paciente novoPaciente = new Paciente(nome, idade, cpf);
@@ -148,9 +152,9 @@ public class GerenciadorHospitalar {
         return false;
     }
 
-
     // Métodos relacionados a Médicos -----------------------------------------
-    public boolean criarMedico(String nome, int idade, String cpf, String crm, String especialidade, int custoConsulta) {
+    public boolean criarMedico(String nome, int idade, String cpf, String crm, String especialidade,
+            int custoConsulta) {
         if (buscarMedicoPorCRM(crm) == null) {
             Medico novoMedico = new Medico(nome, idade, cpf, crm, especialidade, custoConsulta);
             cadastrarMedico(novoMedico);
@@ -159,7 +163,9 @@ public class GerenciadorHospitalar {
         System.out.println("Erro: Já existe um médico com o CRM " + crm);
         return false;
     }
-    public boolean atualizarMedico(String crm, String novoNome, int novaIdade, String novaEspecialidade, int novoCustoConsulta) {
+
+    public boolean atualizarMedico(String crm, String novoNome, int novaIdade, String novaEspecialidade,
+            int novoCustoConsulta) {
         Medico medico = buscarMedicoPorCRM(crm);
         if (medico != null) {
             medico.setNome(novoNome);
@@ -172,6 +178,7 @@ public class GerenciadorHospitalar {
         System.out.println("Erro: Médico com CRM " + crm + " não encontrado.");
         return false;
     }
+
     public boolean removerMedico(String crm) {
         Medico medico = buscarMedicoPorCRM(crm);
         if (medico != null) {
@@ -182,6 +189,7 @@ public class GerenciadorHospitalar {
         System.out.println("Erro: Médico com CRM " + crm + " não encontrado.");
         return false;
     }
+
     // Métodos relacionados a Internações
     public void podeInternar(int numeroQuarto) {
         for (Internacao i : internacoes) {
@@ -193,10 +201,3 @@ public class GerenciadorHospitalar {
         System.out.println("O quarto " + numeroQuarto + " está disponível para internação.");
     }
 }
-
-        
-
-
-
-        
-
