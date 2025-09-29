@@ -13,8 +13,8 @@ public class MenuMedico {
         }
 
     public void exibirMenu() throws InterruptedException {
-        int opcao;
-        do {
+       boolean rodando = true;
+        while (rodando) {
             System.out.println("");
             System.out.println("------ Menu Médicos ------");
             System.out.println("1. Cadastrar Médico");
@@ -22,10 +22,9 @@ public class MenuMedico {
             System.out.println("3. Remover Médico");
             System.out.println("4. Voltar ao Menu Principal");
             System.out.println("--------------------------");
-            System.out.print("> Escolha uma opção: ");
-            opcao = sc.nextInt();
+            int op = util.Utilitario.lerInt(sc, "> Escolha uma opção: ");
 
-            switch (opcao) {
+            switch (op) {
                 case 1:
                     break;
                 case 2:
@@ -34,13 +33,13 @@ public class MenuMedico {
                 case 3:
                     break;
                 case 4:
-                    new Menu(sc, gh);
+                    rodando = false;
                     break;
                 default:
                     System.out.println("Opção inválida!");
                     break;
             }
-        } while (opcao != 4);
+        }
     }
 
 }

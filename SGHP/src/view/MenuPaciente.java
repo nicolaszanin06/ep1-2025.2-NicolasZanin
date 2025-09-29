@@ -17,10 +17,10 @@ public class MenuPaciente {
         this.sc = sc;
         this.gh = gh;
     }
-    
-    public void exibirMenu() throws InterruptedException {    
-        int opcao;
-        do {
+
+    public void exibirMenu() throws InterruptedException {
+        boolean rodando = true;
+        while (rodando) {
             System.out.println("");
             System.out.println("------ Menu Pacientes ------");
             System.out.println("1. Cadastrar Paciente");
@@ -28,10 +28,8 @@ public class MenuPaciente {
             System.out.println("3. Remover Paciente");
             System.out.println("4. Voltar ao Menu Principal");
             System.out.println("----------------------------");
-            System.out.print("> Escolha uma opção: ");
-
-            opcao = lerOpcaoMenu();
-            switch (opcao) {
+            int op = util.Utilitario.lerInt(sc, "> Escolha uma opção: ");
+            switch (op) {
                 case 1:
                     System.out.println();
                     System.out.println("------ Cadastrar Paciente ------");
@@ -63,14 +61,13 @@ public class MenuPaciente {
                     removerPaciente();
                     break;
                 case 4:
-                    System.out.println("Voltando ao menu principal...");
-                    new Menu(sc, gh);
+                    rodando = false;
                     break;
                 default:
                     System.out.println("Opção inválida!");
                     break;
             }
-        } while (opcao != 4);
+        }
     }
 
     private int lerOpcaoMenu() {

@@ -6,15 +6,21 @@ import service.GerenciadorHospitalar;
 public class Menu {
     private Scanner sc = new Scanner(System.in);
     private GerenciadorHospitalar gh;
+    private MenuPaciente menuPaciente;
+    private MenuMedico menuMedico;
+    private MenuConsulta menuConsulta;
 
     public Menu(Scanner sc, GerenciadorHospitalar gh) throws InterruptedException {
         this.sc = sc;
         this.gh = gh;
+        this.menuPaciente = new MenuPaciente(sc, gh);
+        this.menuMedico = new MenuMedico(sc, gh);
+        this.menuConsulta = new MenuConsulta(sc, gh);
     }
 
     public void exibirMenu() throws InterruptedException {
-        int opcao;
-        do {
+        boolean rodando = true;
+        while (rodando) {
             System.out.println("");
             System.out.println("------ Menu Principal ------");
             System.out.println("1. Gerenciar Pacientes");
@@ -22,28 +28,26 @@ public class Menu {
             System.out.println("3. Gerenciar Consultas");
             System.out.println("4. Sair");
             System.out.println("---------------------------");
-            System.out.print("> Escolha uma opção: ");
-            opcao = sc.nextInt();
-            switch (opcao) {
+            int op = util.Utilitario.lerInt(sc, "> Escolha uma opção: ");
+
+            switch (op) {
                 case 1:
-                    MenuPaciente menuPaciente = new MenuPaciente(sc, gh);
                     menuPaciente.exibirMenu();
                     break;
                 case 2:
-                    MenuMedico menuMedico = new MenuMedico(sc, gh);
                     menuMedico.exibirMenu();
                     break;
                 case 3:
-                    MenuConsulta menuConsulta = new MenuConsulta(sc, gh);
                     menuConsulta.exibirMenu();
                     break;
                 case 4:
+                    rodando = false;
                     System.out.println("Salvando alterações e saindo...");
                     break;
                 default:
                     System.out.println("Opção inválida!");
                     Thread.sleep(1000);
             }
-        } while (opcao != 4);
+        }
     }
 }

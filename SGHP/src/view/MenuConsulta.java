@@ -20,8 +20,8 @@ public class MenuConsulta {
     }
 
     public void exibirMenu() throws InterruptedException {
-        int opcao;
-        do {
+        boolean rodando = true;
+        while (rodando) {
             System.out.println("");
             System.out.println("------ Menu Consultas ------");
             System.out.println("1. Agendar Consulta");
@@ -30,10 +30,9 @@ public class MenuConsulta {
             System.out.println("4. Cancelar Consulta");
             System.out.println("5. Voltar ao Menu Principal");
             System.out.println("----------------------------");
-            System.out.print("> Escolha uma opção: ");
-            opcao = sc.nextInt();
+            int op = util.Utilitario.lerInt(sc, "> Escolha uma opção: ");
 
-            switch (opcao) {
+            switch (op) {
                 case 1:
                     agendarConsulta();
                     break;
@@ -47,14 +46,13 @@ public class MenuConsulta {
                     cancelarConsulta();
                     break;
                 case 5:
-                    System.out.println("Voltando ao menu principal...");
-                    new Menu(sc, gh);
+                    rodando = false;
                     break;
                 default:
                     System.out.println("Opção inválida!");
                     break;
             }
-        } while (opcao != 5);
+        }
 
     }
 
