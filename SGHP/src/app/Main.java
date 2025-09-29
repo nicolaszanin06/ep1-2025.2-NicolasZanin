@@ -24,8 +24,9 @@ public class Main {
         Menu menu = new Menu(sc, gh);
         menu.exibirMenu();
         
-        sc.close();
+
             }
+    sc.close();
         }
     }
 
