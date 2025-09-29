@@ -1,21 +1,26 @@
 package service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import model.Paciente;
 import model.enums.StatusConsulta;
 import model.Medico;
 import model.Consulta;
+import model.Internacao;
 
 public class GerenciadorHospitalar {
     private List<Paciente> pacientes;
     private List<Medico> medicos;
     private List<Consulta> consultas;
-
+    private List<Internacao> internacoes;
 
     public GerenciadorHospitalar() {
         this.pacientes = new java.util.ArrayList<>();
         this.medicos = new java.util.ArrayList<>();
         this.consultas = new java.util.ArrayList<>();
+        this.internacoes = new ArrayList<>();
     }
     
 
@@ -177,8 +182,21 @@ public class GerenciadorHospitalar {
         System.out.println("Erro: Médico com CRM " + crm + " não encontrado.");
         return false;
     }
-
-
+    // Métodos relacionados a Internações
+    public void podeInternar(int numeroQuarto) {
+        for (Internacao i : internacoes) {
+            if (i.getNumeroQuarto() == numeroQuarto && i.estaAtiva()) {
+                System.out.println("ERRO: O quarto " + numeroQuarto + " já está ocupado.");
+                return;
+            }
+        }
+        System.out.println("O quarto " + numeroQuarto + " está disponível para internação.");
+    }
+    public Internacao internarPaciente(Paciente p, Medico m, LocalDateTime entrada, LocalDateTime saida, int quarto, double custo) {
+    Internacao nova = new Internacao(p, m, entrada, saida, quarto, custo);
+    internacoes.add(nova);
+    return nova;
+}
 
         
 

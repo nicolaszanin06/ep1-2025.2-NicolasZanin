@@ -11,10 +11,11 @@ public class Internacao {
     private double custoDiario;
     private boolean cancelada;
 
-    public Internacao(Paciente paciente, Medico medico, LocalDateTime dataInternacao, int numeroQuarto, double custoDiario) {
+    public Internacao(Paciente paciente, Medico medico, LocalDateTime dataInternacao, LocalDateTime dataAlta, int numeroQuarto, double custoDiario) {
         this.paciente = paciente;
         this.medico = medico;
         this.dataInternacao = dataInternacao;
+        this.dataAlta = dataAlta;
         this.numeroQuarto = numeroQuarto;
         this.custoDiario = custoDiario;
         this.cancelada = false;
