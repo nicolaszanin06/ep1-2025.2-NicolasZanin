@@ -8,7 +8,9 @@ import java.util.Scanner;
 import model.Consulta;
 import model.Medico;
 import model.Paciente;
+import model.enums.StatusConsulta;
 import service.GerenciadorHospitalar;
+import util.Utilitario;
 
 public class MenuConsulta {
     private Scanner sc;
@@ -26,9 +28,10 @@ public class MenuConsulta {
             System.out.println("------ Menu Consultas ------");
             System.out.println("1. Agendar Consulta");
             System.out.println("2. Listar Consultas");
-            System.out.println("3. Concluir Consulta");
-            System.out.println("4. Cancelar Consulta");
-            System.out.println("5. Voltar ao Menu Principal");
+            System.out.println("3. Detalhar Consulta");
+            System.out.println("4. Concluir Consulta");
+            System.out.println("5. Cancelar Consulta");
+            System.out.println("6. Voltar ao Menu Principal");
             System.out.println("----------------------------");
             int op = util.Utilitario.lerInt(sc, "> Escolha uma opção: ");
 
@@ -40,12 +43,15 @@ public class MenuConsulta {
                     listarConsultas();
                     break;
                 case 3:
-                    concluirConsulta();
+                    detalharConsulta();
                     break;
                 case 4:
-                    cancelarConsulta();
+                    concluirConsulta();
                     break;
                 case 5:
+                    cancelarConsulta();
+                    break;
+                case 6:
                     rodando = false;
                     break;
                 default:
@@ -112,47 +118,46 @@ public class MenuConsulta {
         }
     }
 
-    // Concluir Consulta
+    // Métodos do Menu
 
     private void concluirConsulta() {
-        System.out.println("--- Concluir Consulta ---");
-        System.out.print("> Insira o ID da consulta a ser concluída: ");
-        int idConsulta = sc.nextInt();
-        sc.nextLine();
-        Consulta consulta = gh.getConsultaByIndex(idConsulta);
-        if (consulta == null) {
-            System.out.println("Consulta não encontrada com o ID: " + idConsulta);
+        int id = Utilitario.lerInt(sc, "ID da consulta: ");
+        Consulta c = gh.buscarConsultaPorId(id);
+        if (c == null) {
+            System.out.println("Consulta não encontrada.");
             return;
         }
-        if (consulta.getStatus() != model.enums.StatusConsulta.AGENDADA) {
-            System.out.println("A consulta deve estar agendada para ser concluída.");
-            return;
+        if (c.getStatus() == StatusConsulta.AGENDADA) {
+            c.setStatus(StatusConsulta.REALIZADA);
+            System.out.println("Consulta " + c.getId() + " marcada como REALIZADA.");
+        } else {
+            System.out.println("Transição inválida: status atual é " + c.getStatus());
         }
-        System.out.print("> Insira o diagnóstico: ");
-        String diagnostico = sc.nextLine();
-        System.out.print("> Insira as prescrições (separadas por vírgula): ");
-        String prescricoesStr = sc.nextLine();
-        List<String> prescricoes = List.of(prescricoesStr.split(","));
-        consulta.realizarConsulta(diagnostico, prescricoes);
-        System.out.println("Consulta concluída com sucesso!");
 
     }
 
     private void cancelarConsulta() {
-        System.out.println("--- Cancelar Consulta ---");
-        System.out.print("> Insira o ID da consulta a ser cancelada: ");
-        int idConsulta = sc.nextInt();
-        sc.nextLine();
-        Consulta consulta = gh.getConsultaByIndex(idConsulta);
-        if (consulta == null) {
-            System.out.println("Consulta não encontrada com o ID: " + idConsulta);
+       int id = Utilitario.lerInt(sc, "ID da consulta: ");
+        Consulta c = gh.buscarConsultaPorId(id);
+        if (c == null) {
+            System.out.println("Consulta não encontrada.");
             return;
         }
-        if (consulta.getStatus() != model.enums.StatusConsulta.AGENDADA) {
-            System.out.println("A consulta deve estar agendada para ser cancelada.");
+        if (c.getStatus() == StatusConsulta.AGENDADA) {
+            c.setStatus(StatusConsulta.CANCELADA);
+            System.out.println("Consulta " + c.getId() + " CANCELADA.");
+        } else {
+            System.out.println("Transição inválida: status atual é " + c.getStatus());
+        }
+    }
+
+    private void detalharConsulta() {
+        int id = Utilitario.lerInt(sc, "ID da consulta: ");
+        Consulta c = gh.buscarConsultaPorId(id);
+        if (c == null) {
+            System.out.println("Consulta não encontrada.");
             return;
         }
-        consulta.cancelarConsulta();
-        System.out.println("Consulta cancelada com sucesso!");
+        System.out.println(c);
     }
 }

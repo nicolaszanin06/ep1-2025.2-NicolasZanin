@@ -200,4 +200,30 @@ public class GerenciadorHospitalar {
         }
         System.out.println("O quarto " + numeroQuarto + " está disponível para internação.");
     }
+
+    // Busca por ID da internação
+    public Consulta buscarConsultaPorId(int id) {
+        for (Consulta c : consultas) {
+            if (c.getId() == id)
+                return c;
+        }
+        return null;
+    }
+
+    public Internacao buscarInternacaoPorId(int id) {
+        for (Internacao i : internacoes) {
+            if (i.getId() == id)
+                return i;
+        }
+        return null;
+    }
+
+
+    public List<Consulta> listarConsultas() {
+        return consultas;
+    }
+
+    public List<Internacao> listarInternacoes() {
+        return internacoes;
+    }
 }

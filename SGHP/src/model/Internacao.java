@@ -10,6 +10,8 @@ public class Internacao {
     private int numeroQuarto;
     private double custoDiario;
     private boolean cancelada;
+    private static int SEQ = 1;
+    private final int id = SEQ++;
 
     public Internacao(Paciente paciente, Medico medico, LocalDateTime dataInternacao, LocalDateTime dataAlta,
             int numeroQuarto, double custoDiario) {
@@ -48,7 +50,7 @@ public class Internacao {
         return custoDiario;
     }
 
-    public double setCustoConsulta(double custoDiario) {
+    public double setCustoDiario(double custoDiario) {
         return this.custoDiario = custoDiario;
     }
 
@@ -72,6 +74,15 @@ public class Internacao {
     public long getTempoDeInternacao() {
         LocalDateTime fim = (dataAlta != null) ? dataAlta : LocalDateTime.now();
         return java.time.Duration.between(dataInternacao, fim).toDays();
+    }
+
+    public double calcularCustoTotal() {
+        long dias = getTempoDeInternacao();
+        return dias * custoDiario;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override

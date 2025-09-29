@@ -13,7 +13,8 @@ public class Consulta {
     private String local;
     private String motivo;
     private StatusConsulta status;
-
+    private static int SEQ = 1;
+    private final int id = SEQ++;
     // atributos para quando a consulta for realizada
 
     private String diagnostico;
@@ -94,11 +95,15 @@ public class Consulta {
         this.prescricoes = prescricoes;
     }
 
+
+    public int getId() {
+        return id;
+}
+
     @Override
     public String toString() {
-        return "Consulta [dataHora=" + dataHora + ", local=" + local + ", medico=" + medico.getNome() + ", motivo="
-                + motivo
-                + ", paciente=" + paciente.getNome() + ", status=" + status.getStatusFormatado() + "]";
+        return "Consulta [id=" + id + "dataHora=" + dataHora + ", local=" + local + ", medico=" + medico.getNome() + ", motivo="
+                + motivo + ", paciente=" + paciente.getNome() + ", status=" + status.getStatusFormatado() + "]";
     }
 
 }
