@@ -1,4 +1,6 @@
 package service;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import model.Paciente;
@@ -107,7 +109,7 @@ public class GerenciadorHospitalar {
         return false;
     }
 
-    // Métodos para listar pacientes, médicos e consultas
+    // Métodos para listar pacientes, médicos, consultas e internações
     // -----------------------------------------
     public List<Paciente> getPacientes() {
         return pacientes;
@@ -119,6 +121,9 @@ public class GerenciadorHospitalar {
 
     public List<Consulta> getConsultas() {
         return consultas;
+    }
+    public List<Internacao> getInternacoes() {
+        return internacoes;
     }
 
     // Métodos relacionados a Pacientes -----------------------------------------
@@ -204,6 +209,45 @@ public class GerenciadorHospitalar {
         System.out.println("O quarto " + numeroQuarto + " está disponível para internação.");
     }
 
+    public boolean quartoDisponivel(int numeroQuarto) {
+        for (Internacao i : internacoes) {
+            if (i.getNumeroQuarto() == numeroQuarto && i.estaAtiva()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean criarInternacao(Paciente p, Medico m, LocalDateTime entrada, int quarto, double custoDiario) {
+        if (!quartoDisponivel(quarto))
+            return false;
+        Internacao nova = new Internacao(p, m, entrada, null, quarto, custoDiario);
+        internacoes.add(nova);
+        return true;
+    }
+
+    public boolean darAlta(int id, java.time.LocalDateTime dataAlta) {
+        Internacao internacao = buscarInternacaoPorId(id);
+        if (internacao != null && internacao.estaAtiva()) {
+            internacao.setDataAlta(dataAlta);
+            System.out.println("Alta registrada para a internação ID " + id);
+            return true;
+        }
+        System.out.println("Erro: Internação com ID " + id + " não encontrada ou já finalizada/cancelada.");
+        return false;
+    }
+
+    public boolean cancelarInternacao(int id) {
+        Internacao i = buscarInternacaoPorId(id);
+        if (i == null)
+            return false;
+        if (!i.estaAtiva())
+            return false;
+        i.cancelarInternacao();
+        return true;
+
+    }
+
     // Busca por ID da internação
     public Consulta buscarConsultaPorId(int id) {
         for (Consulta c : consultas) {
@@ -221,12 +265,4 @@ public class GerenciadorHospitalar {
         return null;
     }
 
-
-    public List<Consulta> listarConsultas() {
-        return consultas;
-    }
-
-    public List<Internacao> listarInternacoes() {
-        return internacoes;
-    }
 }

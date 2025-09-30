@@ -16,7 +16,7 @@ public class PacienteEspecial extends Paciente {
 
     @Override
     public String toString() {
-        return "Paciente Especial: " + super.toString() + ", Plano de Saúde: " + planoSaude;
+        return super.toString() + ", Plano de Saúde: " + planoSaude;
     }
 
     @Override
