@@ -103,8 +103,8 @@ public class Consulta {
     @Override
     public String toString() {
         var fmt = java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        return "Consulta [id=" + id + "dataHora=" + dataHora.format(fmt) + ", local=" + local + ", medico=" + medico.getNome() + ", motivo="
-                + motivo + ", paciente=" + paciente.getNome() + ", status=" + status.getStatusFormatado() + "]";
+        return "ID da Consulta =" + id + ", Data e Hora =" + dataHora.format(fmt) + ", Local =" + local + ", Médico =" + medico.getNome() + ", Motivo ="
+                + motivo + ", Paciente =" + paciente.getNome() + ", Status =" + status.getStatusFormatado();
     }
 
 }

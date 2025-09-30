@@ -26,11 +26,13 @@ public class MenuMedico {
 
             switch (op) {
                 case 1:
+                    cadastrarMedico();
                     break;
                 case 2:
-                    System.out.println("Listando médicos...");
+                    listarMedicos();
                     break;
                 case 3:
+                    removerMedico();
                     break;
                 case 4:
                     rodando = false;
@@ -41,5 +43,31 @@ public class MenuMedico {
             }
         }
     }
-
+    private void cadastrarMedico() {
+        System.out.println("\n--- Cadastrar Médico ---");
+        String nome = util.Utilitario.lerString(sc, "Nome: ");
+        int idade = util.Utilitario.lerInt(sc, "Idade: ");
+        String cpf = util.Utilitario.lerString(sc, "CPF: ");
+        String crm = util.Utilitario.lerString(sc, "CRM: ");
+        String esp = util.Utilitario.lerString(sc, "Especialidade: ");
+        double custo = util.Utilitario.lerDouble(sc, "Custo da Consulta: ");
+        gh.cadastrarMedico(new model.Medico(nome, idade, cpf, crm, esp, custo));
+        System.out.println("Médico cadastrado.");
+    }
+    private void listarMedicos() {
+        System.out.println("\n--- Lista de Médicos ---");
+        for (model.Medico m : gh.getMedicos()) {
+            System.out.println(m);
+        }
+    }
+    private void removerMedico() {
+        System.out.println("\n--- Remover Médico ---");
+        String crm = util.Utilitario.lerString(sc, "> Digite o CRM do médico a ser removido: ");
+        boolean removido = gh.removerMedico(crm);
+        if (removido) {
+            System.out.println("Médico removido com sucesso.");
+        } else {
+            System.out.println("Médico com CRM " + crm + " não encontrado.");
+        }
+    }
 }
