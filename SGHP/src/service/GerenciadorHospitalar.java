@@ -28,14 +28,28 @@ public class GerenciadorHospitalar {
         this.consultas = consultas;
     }
 
-    public void cadastrarPaciente(Paciente paciente) {
+    // Métodos de Cadastro e etc
+
+    // Métodos com Validadores
+
+    public boolean cadastrarPacienteValidador(Paciente paciente) {
+        if (buscarPacientePorCPF(paciente.getCpf()) != null) {
+            System.out.println("Erro: Já existe paciente com CPF " + paciente.getCpf());
+            return false;
+        }
         pacientes.add(paciente);
         System.out.println("Paciente cadastrado com sucesso: " + paciente.getNome());
+        return true;
     }
 
-    public void cadastrarMedico(Medico medico) {
+    public boolean cadastrarMedicoValidador(Medico medico) {
+        if (buscarMedicoPorCRM(medico.getCrm()) != null) {
+            System.out.println("Erro: Já existe médico com CRM " + medico.getCrm());
+            return false;
+        }
         medicos.add(medico);
         System.out.println("Médico cadastrado com sucesso: " + medico.getNome());
+        return true;
     }
 
     public void agendarConsulta(Consulta consulta) {
@@ -122,6 +136,7 @@ public class GerenciadorHospitalar {
     public List<Consulta> getConsultas() {
         return consultas;
     }
+
     public List<Internacao> getInternacoes() {
         return internacoes;
     }
@@ -153,7 +168,7 @@ public class GerenciadorHospitalar {
     public boolean criarPaciente(String nome, int idade, String cpf) {
         if (buscarPacientePorCPF(cpf) == null) {
             Paciente novoPaciente = new Paciente(nome, idade, cpf);
-            cadastrarPaciente(novoPaciente);
+            cadastrarPacienteValidador(novoPaciente);
             return true;
         }
         System.out.println("Erro: Já existe um paciente com o CPF " + cpf);
@@ -165,7 +180,7 @@ public class GerenciadorHospitalar {
             int custoConsulta) {
         if (buscarMedicoPorCRM(crm) == null) {
             Medico novoMedico = new Medico(nome, idade, cpf, crm, especialidade, custoConsulta);
-            cadastrarMedico(novoMedico);
+            cadastrarMedicoValidador(novoMedico);
             return true;
         }
         System.out.println("Erro: Já existe um médico com o CRM " + crm);

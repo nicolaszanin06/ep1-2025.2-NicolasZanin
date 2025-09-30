@@ -51,7 +51,7 @@ public class MenuMedico {
         String crm = util.Utilitario.lerString(sc, "CRM: ");
         String esp = util.Utilitario.lerString(sc, "Especialidade: ");
         double custo = util.Utilitario.lerDouble(sc, "Custo da Consulta: ");
-        gh.cadastrarMedico(new model.Medico(nome, idade, cpf, crm, esp, custo));
+        gh.cadastrarMedicoValidador(new model.Medico(nome, idade, cpf, crm, esp, custo));
         System.out.println("Médico cadastrado.");
     }
     private void listarMedicos() {

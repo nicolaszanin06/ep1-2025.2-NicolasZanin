@@ -94,8 +94,12 @@ public class MenuPaciente {
         System.out.print("> CPF: ");
         sc.nextLine();
         String cpf = sc.nextLine();
+        if (!util.Utilitario.cpfValidador(cpf)) {
+            System.out.println("CPF inválido. Verifique o número de dígitos. ");
+            return;
+        }
         Paciente novoPaciente = new Paciente(nome, idade, cpf);
-        gh.cadastrarPaciente(novoPaciente);
+        gh.cadastrarPacienteValidador(novoPaciente);
     }
 
     private void cadastrarPacienteEspecial() {
@@ -108,7 +112,10 @@ public class MenuPaciente {
         System.out.print("> CPF: ");
         sc.nextLine();
         String cpf = sc.nextLine();
-
+        if (!util.Utilitario.cpfValidador(cpf)) {
+            System.out.println("CPF inválido. Verifique o número de dígitos. ");
+            return;
+        }
         System.out.println("--- Planos de Saúdes válidos ---");
         for (PlanoDeSaude plano : PlanoDeSaude.values()) {
             System.out.println(
@@ -124,7 +131,7 @@ public class MenuPaciente {
             return;
         }
         PacienteEspecial novoPacienteEspecial = new PacienteEspecial(nome, idade, cpf, planoEscolhido);
-        gh.cadastrarPaciente(novoPacienteEspecial);
+        gh.cadastrarPacienteValidador(novoPacienteEspecial);
 
     }
 

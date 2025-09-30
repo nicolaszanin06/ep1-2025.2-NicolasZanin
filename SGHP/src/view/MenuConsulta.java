@@ -76,18 +76,29 @@ public class MenuConsulta {
             System.out.println("Médico não encontrado com o CRM: " + crmMedico);
             return;
         }
-        LocalDateTime dataHora = Utilitario.lerDataHora(sc, "> Data e hora (dd-MM-yyyy HH:mm): ");
-        System.out.println("> Insira o local da consulta: ");
-        String local = sc.nextLine();
-        System.out.println("> Insira o motivo da consulta: ");
-        String motivo = sc.nextLine();
+        LocalDateTime dataHora = null;
+        boolean dataValida = false;
+        while (!dataValida) {
+            dataHora = Utilitario.lerDataHora(sc, "> Insirar a data e hora da consulta (dd-MM-yyyy HH:mm): ");
+            if (dataHora.isBefore(LocalDateTime.now())) {
+                System.out.println("A data/hora da consulta não pode ser no passado.");
+            } else {
+                dataValida = true;
+            }
 
-        Consulta novaConsulta = new Consulta(paciente, medico, dataHora, local, motivo);
-        gh.agendarConsulta(novaConsulta);
-        paciente.adicionarConsulta(novaConsulta);
+            System.out.println("> Insira o local da consulta: ");
+            String local = sc.nextLine();
+            System.out.println("> Insira o motivo da consulta: ");
+            String motivo = sc.nextLine();
 
-        System.out.println("Consulta agendada com sucesso para " + paciente.getNome() + " com o Dr. " + medico.getNome()
-                + " em " + dataHora.format(java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
+            Consulta novaConsulta = new Consulta(paciente, medico, dataHora, local, motivo);
+            gh.agendarConsulta(novaConsulta);
+            paciente.adicionarConsulta(novaConsulta);
+
+            System.out.println("Consulta agendada com sucesso para " + paciente.getNome() + " com o Dr. "
+                    + medico.getNome()
+                    + " em " + dataHora.format(java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
+        }
     }
 
     // Listar Consultas
@@ -106,7 +117,7 @@ public class MenuConsulta {
 
     // Métodos do Menu
 
-     private void concluirConsulta() {
+    private void concluirConsulta() {
         int id = Utilitario.lerInt(sc, "ID da consulta: ");
         Consulta c = gh.buscarConsultaPorId(id);
         if (c == null) {
