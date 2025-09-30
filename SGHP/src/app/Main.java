@@ -11,6 +11,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         GerenciadorHospitalar gh = new GerenciadorHospitalar();
         var repoPac = new repository.PacienteRepository();
+        var repoMed = new repository.MedicoRepository();
         {
             System.out.println("Bem-vindo(a) ao Sistema de Gerenciamento Hospitalar!");
             System.out.print("Carregando o menu");
@@ -22,14 +23,15 @@ public class Main {
             Thread.sleep(700);
             System.out.println(".");
 
-            // Carrega Pacientes
+            // Carregar
             try {
                 var pacientes = repoPac.carregar(Path.of("data/pacientes.csv"));
                 pacientes.forEach(gh::cadastrarPacienteValidador);
             } catch (Exception e) {
                 System.out.println("Aviso: não foi possível carregar pacientes: " + e.getMessage());
             }
-
+            gh.getMedicos().addAll(repoMed.carregar(java.nio.file.Path.of("data/medicos.csv")));
+            
             Thread.sleep(1000);
             Menu menu = new Menu(sc, gh);
             menu.exibirMenu();
@@ -37,11 +39,13 @@ public class Main {
         }
         sc.close();
 
-        // Salva Pacientes
+        // Salvar
         try {
             repoPac.salvar(gh.getPacientes(), Path.of("data/pacientes.csv"));
         } catch (Exception e) {
             System.out.println("Erro: não foi possível salvar pacientes: " + e.getMessage());
         }
+
+        repoMed.salvar(gh.getMedicos(), java.nio.file.Path.of("data/medicos.csv"));
     }
 }

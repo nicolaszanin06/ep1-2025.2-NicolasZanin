@@ -37,7 +37,7 @@ public class Medico extends Pessoa {
     }
 
     public String toString() {
-        return "Médico: " + super.toString() + ", CRM: " + crm + ", Especialidade: " + especialidade
+        return super.toString() + ", CRM: " + crm + ", Especialidade: " + especialidade
                 + ", Custo da Consulta: R$" + String.format("%.2f", custoConsulta);
     }
 }
