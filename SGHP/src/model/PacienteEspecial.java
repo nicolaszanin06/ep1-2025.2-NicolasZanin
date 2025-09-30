@@ -19,8 +19,13 @@ public class PacienteEspecial extends Paciente {
         return "Paciente Especial: " + super.toString() + ", Plano de Saúde: " + planoSaude;
     }
 
+    @Override
     public double custoDaConsulta(Medico medico) {
-        return (medico.getCustoConsulta() * (1 - planoSaude.getDesconto())); // Sobreescrita do código vindo do Paciente
+        double preco = medico.getCustoConsulta() * (1 - planoSaude.getDesconto());
+        if (getIdade() >= 60) {
+            preco *= 0.9;
+        }
+        return preco;
     }
 
 }

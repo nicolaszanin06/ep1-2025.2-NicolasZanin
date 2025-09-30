@@ -2,6 +2,8 @@ package model;
 
 import java.time.LocalDateTime;
 
+import model.enums.PlanoDeSaude;
+
 public class Internacao {
     private Paciente paciente;
     private Medico medico;
@@ -78,6 +80,12 @@ public class Internacao {
 
     public double calcularCustoTotal() {
         long dias = Math.max(1, getTempoDeInternacao());
+        if (paciente instanceof PacienteEspecial pe) {
+            PlanoDeSaude plano = pe.getPlanoSaude();
+            if (plano.isEspecialInternacaoCurta() && dias < 7) {
+                return 0.0;
+            }
+        }
         return dias * custoDiario;
     }
 
