@@ -29,7 +29,7 @@ public class Menu {
             System.out.println("2. Gerenciar Médicos");
             System.out.println("3. Gerenciar Consultas");
             System.out.println("4. Gerenciar Internações");
-            System.out.println("4. Sair");
+            System.out.println("5. Sair");
             System.out.println("---------------------------");
             int op = util.Utilitario.lerInt(sc, "> Escolha uma opção: ");
 
@@ -45,6 +45,7 @@ public class Menu {
                     break;
                 case 4:
                     menuInternacao.exibirMenu();
+                    break;
                 case 5:
                     rodando = false;
                     System.out.println("Salvando alterações e saindo...");

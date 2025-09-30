@@ -21,7 +21,7 @@ public class MenuInternacao {
     }
 
     public void exibirMenu() {
-        boolean rodando = false;
+        boolean rodando = true;
         while (rodando) {
             System.out.println("\n--- Menu de Internação ---");
             System.out.println("1. Internar Paciente");
@@ -29,6 +29,7 @@ public class MenuInternacao {
             System.out.println("3. Alta de Paciente");
             System.out.println("4. Cancelar Internação");
             System.out.println("5. Voltar ao Menu Principal");
+            System.out.println("--------------------------");
             int op = Utilitario.lerInt(sc, "> Escolha uma opção: ");
 
             switch (op) {
@@ -55,7 +56,6 @@ public class MenuInternacao {
 
     private void cadastrarInternacao() {
         System.out.println("--- Cadastrar Internação ---");
-        sc.nextLine();
         String cpf = Utilitario.lerString(sc, "> CPF do paciente: ");
         Paciente p = gh.buscarPacientePorCPF(cpf);
         if (p == null) {
@@ -88,13 +88,13 @@ public class MenuInternacao {
             return;
         }
         for (Internacao i : lista) {
-            System.out.println("ID=" + i.getId() +
-                    " | Paciente=" + i.getPaciente().getNome() +
-                    " | Médico=" + i.getMedico().getNome() +
-                    " | Quarto=" + i.getNumeroQuarto() +
-                    " | Ativa=" + i.estaAtiva() +
-                    " | Entrada=" + i.getDataInternacao() +
-                    " | Alta=" + i.getDataAlta());
+            System.out.println("ID = " + i.getId() +
+                    " | Paciente = " + i.getPaciente().getNome() +
+                    " | Médico = " + i.getMedico().getNome() +
+                    " | Quarto = " + i.getNumeroQuarto() +
+                    " | Ativa = " + i.estaAtiva() +
+                    " | Entrada = " + i.getDataInternacao() +
+                    " | Alta = " + i.getDataAlta());
         }
     }
     private void darAlta() {
