@@ -95,15 +95,20 @@ public class Consulta {
         this.prescricoes = prescricoes;
     }
 
-
     public int getId() {
         return id;
-}
+    }
+
+    public static void ajustarSequenciaAposCarga(int maxId) {
+        if (maxId >= SEQ)
+            SEQ = maxId + 1;
+    }
 
     @Override
     public String toString() {
         var fmt = java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        return "ID da Consulta =" + id + ", Data e Hora =" + dataHora.format(fmt) + ", Local =" + local + ", Médico =" + medico.getNome() + ", Motivo ="
+        return "ID da Consulta =" + id + ", Data e Hora =" + dataHora.format(fmt) + ", Local =" + local + ", Médico ="
+                + medico.getNome() + ", Motivo ="
                 + motivo + ", Paciente =" + paciente.getNome() + ", Status =" + status.getStatusFormatado();
     }
 
