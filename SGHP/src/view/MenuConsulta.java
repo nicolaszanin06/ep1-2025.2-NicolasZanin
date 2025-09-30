@@ -1,7 +1,6 @@
 package view;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -77,20 +76,7 @@ public class MenuConsulta {
             System.out.println("Médico não encontrado com o CRM: " + crmMedico);
             return;
         }
-
-        LocalDateTime dataHora = null;
-        boolean dataValida = false;
-        while (!dataValida) {
-            System.out.println("> Insira a data e hora da consulta (dd-MM-yyyy HH:mm): ");
-            String dataHoraStr = sc.nextLine();
-            try {
-                dataHora = LocalDateTime.parse(dataHoraStr,
-                        java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
-                dataValida = true;
-            } catch (DateTimeParseException e) {
-                System.out.println("Formato de data e hora inválido. Use DD-MM-YYYY HH:MM.");
-            }
-        }
+        LocalDateTime dataHora = Utilitario.lerDataHora(sc, "> Data e hora (dd-MM-yyyy HH:mm): ");
         System.out.println("> Insira o local da consulta: ");
         String local = sc.nextLine();
         System.out.println("> Insira o motivo da consulta: ");

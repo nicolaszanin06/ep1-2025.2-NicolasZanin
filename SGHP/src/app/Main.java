@@ -10,8 +10,8 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         GerenciadorHospitalar gh = new GerenciadorHospitalar();
         {
-            System.out.println("Bem-vindo(a) ao sistema de Gerenciamento Hospitalar!");
-            System.out.print("Carregando o menu. \nAguarde");
+            System.out.println("Bem-vindo(a) ao Sistema de Gerenciamento Hospitalar!");
+            System.out.print("Carregando o menu");
             // Animação de Loading
             Thread.sleep(700);
             System.out.print(".");
