@@ -41,9 +41,15 @@ public class GerenciadorHospitalar {
 
     public void agendarConsulta(Consulta consulta) {
         for (Consulta c : consultas) {
-            if (c.getMedico().equals(consulta.getMedico()) && c.getDataHora().equals(consulta.getDataHora())) {
+            boolean mesmoHorario = c.getDataHora().equals(consulta.getDataHora());
+            if (mesmoHorario && c.getMedico().equals(consulta.getMedico())) {
                 System.out.println(
                         "ERRO: O médico " + consulta.getMedico().getNome() + " já possui uma consulta neste horário.");
+                return;
+            }
+            if (mesmoHorario && c.getLocal().equalsIgnoreCase(consulta.getLocal())) {
+                System.out.println(
+                        "ERRO: O local '" + consulta.getLocal() + "' já está ocupado neste horário.");
                 return;
             }
         }

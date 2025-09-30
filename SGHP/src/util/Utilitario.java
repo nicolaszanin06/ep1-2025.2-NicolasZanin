@@ -12,7 +12,9 @@ public class Utilitario {
             System.out.print("Entrada inválida. " + mensagem);
             sc.next();
         }
-        return sc.nextInt();
+        int v = sc.nextInt();
+        sc.nextLine();
+        return v;
     }
 
     public static double lerDouble(Scanner sc, String mensagem) {
@@ -21,7 +23,9 @@ public class Utilitario {
             System.out.print("Entrada inválida. " + mensagem);
             sc.next();
         }
-        return sc.nextDouble();
+        double v = sc.nextDouble();
+        sc.nextLine();
+        return v;
     }
 
     public static String lerString(Scanner sc, String mensagem) {

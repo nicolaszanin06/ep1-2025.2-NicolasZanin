@@ -3,9 +3,9 @@ package model;
 public class Medico extends Pessoa {
     private String crm;
     private String especialidade;
-    private int custoConsulta;
+    private double custoConsulta;
 
-    public Medico(String nome, int idade, String cpf, String crm, String especialidade, int custoConsulta) {
+    public Medico(String nome, int idade, String cpf, String crm, String especialidade, double custoConsulta) {
         super(nome, idade, cpf);
         this.crm = crm;
         this.especialidade = especialidade;
@@ -28,16 +28,16 @@ public class Medico extends Pessoa {
         this.especialidade = especialidade;
     }
 
-    public int getCustoConsulta() {
+    public double getCustoConsulta() {
         return custoConsulta;
     }
 
-    public void setCustoConsulta(int custoConsulta) {
+    public void setCustoConsulta(double custoConsulta) {
         this.custoConsulta = custoConsulta;
     }
 
     public String toString() {
         return "Médico: " + super.toString() + ", CRM: " + crm + ", Especialidade: " + especialidade
-                + ", Custo da Consulta: R$" + custoConsulta;
+                + ", Custo da Consulta: R$" + String.format("%.2f", custoConsulta);
     }
 }

@@ -65,16 +65,13 @@ public class MenuConsulta {
     // Código para Agendar Consulta
     private void agendarConsulta() {
         System.out.println("--- Agendar Consulta ---");
-        System.out.print("> Insira o CPF do paciente: ");
-        sc.nextLine();
-        String cpfPaciente = sc.nextLine();
+        String cpfPaciente = util.Utilitario.lerString(sc, "> Digite o CPF do paciente: ");
         Paciente paciente = gh.buscarPacientePorCPF(cpfPaciente);
         if (paciente == null) {
             System.out.println("Paciente não encontrado com o CPF: " + cpfPaciente);
             return;
         }
-        System.out.println("> Insira o CRM do médico: ");
-        String crmMedico = sc.nextLine();
+        String crmMedico = util.Utilitario.lerString(sc, "> Digite o CRM do paciente: ");
         Medico medico = gh.buscarMedicoPorCRM(crmMedico);
         if (medico == null) {
             System.out.println("Médico não encontrado com o CRM: " + crmMedico);
@@ -98,8 +95,11 @@ public class MenuConsulta {
         String local = sc.nextLine();
         System.out.println("> Insira o motivo da consulta: ");
         String motivo = sc.nextLine();
-        Consulta novConsulta = new Consulta(paciente, medico, dataHora, local, motivo);
-        gh.agendarConsulta(novConsulta);
+
+        Consulta novaConsulta = new Consulta(paciente, medico, dataHora, local, motivo);
+        gh.agendarConsulta(novaConsulta);
+        paciente.adicionarConsulta(novaConsulta);
+
         System.out.println("Consulta agendada com sucesso para " + paciente.getNome() + " com o Dr. " + medico.getNome()
                 + " em " + dataHora.format(java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
     }
@@ -120,24 +120,34 @@ public class MenuConsulta {
 
     // Métodos do Menu
 
-    private void concluirConsulta() {
+     private void concluirConsulta() {
         int id = Utilitario.lerInt(sc, "ID da consulta: ");
         Consulta c = gh.buscarConsultaPorId(id);
         if (c == null) {
             System.out.println("Consulta não encontrada.");
             return;
         }
-        if (c.getStatus() == StatusConsulta.AGENDADA) {
-            c.setStatus(StatusConsulta.REALIZADA);
-            System.out.println("Consulta " + c.getId() + " marcada como REALIZADA.");
-        } else {
+        if (c.getStatus() != StatusConsulta.AGENDADA) {
             System.out.println("Transição inválida: status atual é " + c.getStatus());
+            return;
         }
 
+        sc.nextLine();
+        System.out.print("Diagnóstico: ");
+        String diag = sc.nextLine();
+        System.out.print("Prescrições (separe por vírgula): ");
+        String linha = sc.nextLine();
+        List<String> prescr = java.util.Arrays.stream(linha.split(","))
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .toList();
+
+        c.realizarConsulta(diag, new java.util.ArrayList<>(prescr));
+        System.out.println("Consulta " + c.getId() + " marcada como REALIZADA.");
     }
 
     private void cancelarConsulta() {
-       int id = Utilitario.lerInt(sc, "ID da consulta: ");
+        int id = Utilitario.lerInt(sc, "ID da consulta: ");
         Consulta c = gh.buscarConsultaPorId(id);
         if (c == null) {
             System.out.println("Consulta não encontrada.");

@@ -116,10 +116,12 @@ public class MenuPaciente {
         }
         System.out.print("> Escolha o código do plano de saúde: ");
         int codigoPlano = sc.nextInt();
-        PlanoDeSaude planoEscolhido = PlanoDeSaude.getPorCodigo(codigoPlano);
-
-        if (planoEscolhido == null) {
+        PlanoDeSaude planoEscolhido;
+        try {
+            planoEscolhido = PlanoDeSaude.getPorCodigo(codigoPlano);
+        } catch (IllegalArgumentException e) {
             System.out.println("Código de plano inválido. Cadastro cancelado.");
+            return;
         }
         PacienteEspecial novoPacienteEspecial = new PacienteEspecial(nome, idade, cpf, planoEscolhido);
         gh.cadastrarPaciente(novoPacienteEspecial);
@@ -140,8 +142,7 @@ public class MenuPaciente {
 
     private void removerPaciente() {
         System.out.println("\n--- Remover Paciente ---");
-        System.out.print("> Informe o CPF do paciente a ser removido: ");
-        String cpf = sc.nextLine();
+        String cpf = util.Utilitario.lerString(sc, "> Digite o CPF do paciente a ser removido: ");
         boolean removido = gh.removerPaciente(cpf);
         if (removido) {
         } else {

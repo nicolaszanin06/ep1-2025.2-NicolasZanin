@@ -50,8 +50,8 @@ public class Internacao {
         return custoDiario;
     }
 
-    public double setCustoDiario(double custoDiario) {
-        return this.custoDiario = custoDiario;
+    public void setCustoDiario(double custoDiario) {
+        this.custoDiario = custoDiario;
     }
 
     public boolean isCancelada() {
@@ -67,7 +67,7 @@ public class Internacao {
     }
 
     public boolean estaAtiva() {
-        return !cancelada && (dataAlta == null || !dataAlta.isBefore(dataInternacao));
+        return !cancelada && dataAlta == null;
 
     }
 
@@ -77,7 +77,7 @@ public class Internacao {
     }
 
     public double calcularCustoTotal() {
-        long dias = getTempoDeInternacao();
+        long dias = Math.max(1, getTempoDeInternacao());
         return dias * custoDiario;
     }
 
