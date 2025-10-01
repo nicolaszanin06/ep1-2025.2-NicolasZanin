@@ -17,13 +17,6 @@ public class PacienteRepository {
     private static final String SEP = ";";
     private static final String HEADER = "tipo;nome;idade;cpf;planoCodigo";
 
-    /**
-     * Salva a lista de pacientes em CSV no caminho informado.
-     * Formato:
-     * tipo;nome;idade;cpf;planoCodigo
-     * COMUM;Maria;30;12345678901;-
-     * ESPECIAL;João;65;10987654321;4
-     */
     public void salvar(List<Paciente> pacientes, Path arquivo) throws IOException {
         if (arquivo.getParent() != null) {
             Files.createDirectories(arquivo.getParent());

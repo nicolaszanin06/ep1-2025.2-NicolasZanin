@@ -37,17 +37,7 @@ public class ConsultaRepository {
                         ? ""
                         : String.join("|", c.getPrescricoes());
 
-                String linha = String.join(SEP,
-                        String.valueOf(c.getId()),
-                        safe(c.getPaciente().getCpf()),
-                        safe(c.getMedico().getCrm()),
-                        c.getDataHora().format(FMT),
-                        escape(c.getLocal()),
-                        escape(c.getMotivo()),
-                        c.getStatus().name(),
-                        escape(c.getDiagnostico()),
-                        escape(prescricoesStr)
-                );
+                String linha = String.join(SEP,String.valueOf(c.getId()),safe(c.getPaciente().getCpf()),safe(c.getMedico().getCrm()),c.getDataHora().format(FMT),escape(c.getLocal()),escape(c.getMotivo()),c.getStatus().name(),escape(c.getDiagnostico()),escape(prescricoesStr));
                 bw.write(linha);
                 bw.newLine();
             }

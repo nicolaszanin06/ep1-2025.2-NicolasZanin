@@ -28,8 +28,6 @@ public class GerenciadorHospitalar {
         this.consultas = consultas;
     }
 
-    // Métodos de Cadastro e etc
-
     // Métodos com Validadores
 
     public boolean cadastrarPacienteValidador(Paciente paciente) {
