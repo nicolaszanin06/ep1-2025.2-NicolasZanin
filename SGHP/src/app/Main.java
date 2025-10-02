@@ -3,6 +3,7 @@ package app;
 import java.nio.file.Path;
 import java.util.Scanner;
 
+import repository.InternacaoRepository;
 import service.GerenciadorHospitalar;
 import view.Menu;
 
@@ -13,6 +14,7 @@ public class Main {
         var repoPac = new repository.PacienteRepository();
         var repoMed = new repository.MedicoRepository();
         var repoCon = new repository.ConsultaRepository();
+        var repoInt = new InternacaoRepository();
 
         {
             System.out.println("Bem-vindo(a) ao Sistema de Gerenciamento Hospitalar!");
@@ -41,7 +43,13 @@ public class Main {
                         Path.of("data/consultas.csv"),
                         cpf -> gh.buscarPacientePorCPF(cpf),
                         crm -> gh.buscarMedicoPorCRM(crm));
+
                 gh.getConsultas().addAll(consultas);
+                var internacoes = repoInt.carregar(
+                        Path.of("data/internacoes.csv"),
+                        cpf -> gh.buscarPacientePorCPF(cpf),
+                        crm -> gh.buscarMedicoPorCRM(crm));
+                gh.getInternacoes().addAll(internacoes);
 
             } catch (Exception e) {
                 System.out.println("Aviso ao carregar dados: " + e.getMessage());
@@ -59,6 +67,7 @@ public class Main {
             repoPac.salvar(gh.getPacientes(), Path.of("data/pacientes.csv"));
             repoMed.salvar(gh.getMedicos(), Path.of("data/medicos.csv"));
             repoCon.salvar(gh.getConsultas(), Path.of("data/consultas.csv"));
+            repoInt.salvar(gh.getInternacoes(), Path.of("data/internacoes.csv"));
         } catch (Exception e) {
             System.out.println("Erro ao salvar dados: " + e.getMessage());
         }
