@@ -3,18 +3,14 @@ package app;
 import java.nio.file.Path;
 import java.util.Scanner;
 
-import repository.InternacaoRepository;
 import service.GerenciadorHospitalar;
+import util.DataCarrega;
 import view.Menu;
 
 public class Main {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
         GerenciadorHospitalar gh = new GerenciadorHospitalar();
-        var repoPac = new repository.PacienteRepository();
-        var repoMed = new repository.MedicoRepository();
-        var repoCon = new repository.ConsultaRepository();
-        var repoInt = new InternacaoRepository();
 
         {
             System.out.println("Bem-vindo(a) ao Sistema de Gerenciamento Hospitalar!");
@@ -28,49 +24,18 @@ public class Main {
             System.out.println(".");
 
             // Carregar arquivos
-            try {
-                var pacientes = repoPac.carregar(Path.of("data/pacientes.csv"));
-                for (var p : pacientes) {
-                    gh.cadastrarPacienteValidador(p);
-                }
-
-                var medicos = repoMed.carregar(Path.of("data/medicos.csv"));
-                for (var m : medicos) {
-                    gh.cadastrarMedicoValidador(m);
-                }
-
-                var consultas = repoCon.carregar(
-                        Path.of("data/consultas.csv"),
-                        cpf -> gh.buscarPacientePorCPF(cpf),
-                        crm -> gh.buscarMedicoPorCRM(crm));
-
-                gh.getConsultas().addAll(consultas);
-                var internacoes = repoInt.carregar(
-                        Path.of("data/internacoes.csv"),
-                        cpf -> gh.buscarPacientePorCPF(cpf),
-                        crm -> gh.buscarMedicoPorCRM(crm));
-                gh.getInternacoes().addAll(internacoes);
-
-            } catch (Exception e) {
-                System.out.println("Aviso ao carregar dados: " + e.getMessage());
-            }
+            DataCarrega.loadAll(gh);
 
             Thread.sleep(1000);
             Menu menu = new Menu(sc, gh);
             menu.exibirMenu();
 
         }
+
+        DataCarrega.saveAll(gh);
+
         sc.close();
 
-        // Salvar arquivos
-        try {
-            repoPac.salvar(gh.getPacientes(), Path.of("data/pacientes.csv"));
-            repoMed.salvar(gh.getMedicos(), Path.of("data/medicos.csv"));
-            repoCon.salvar(gh.getConsultas(), Path.of("data/consultas.csv"));
-            repoInt.salvar(gh.getInternacoes(), Path.of("data/internacoes.csv"));
-        } catch (Exception e) {
-            System.out.println("Erro ao salvar dados: " + e.getMessage());
-        }
-
     }
+
 }
