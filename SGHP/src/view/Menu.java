@@ -10,6 +10,7 @@ public class Menu {
     private MenuMedico menuMedico;
     private MenuConsulta menuConsulta;
     private MenuInternacao menuInternacao;
+    private MenuRelatorios menuRelatorios;
 
     public Menu(Scanner sc, GerenciadorHospitalar gh) throws InterruptedException {
         this.sc = sc;
@@ -18,6 +19,8 @@ public class Menu {
         this.menuMedico = new MenuMedico(sc, gh);
         this.menuConsulta = new MenuConsulta(sc, gh);
         this.menuInternacao = new MenuInternacao(sc, gh);
+        this.menuRelatorios = new MenuRelatorios(sc, gh);
+
     }
 
     public void exibirMenu() throws InterruptedException {
@@ -29,7 +32,8 @@ public class Menu {
             System.out.println("2. Gerenciar Médicos");
             System.out.println("3. Gerenciar Consultas");
             System.out.println("4. Gerenciar Internações");
-            System.out.println("5. Sair");
+            System.out.println("5. Relatórios");
+            System.out.println("6. Sair");
             System.out.println("---------------------------");
             int op = util.Utilitario.lerInt(sc, "> Escolha uma opção: ");
 
@@ -47,6 +51,9 @@ public class Menu {
                     menuInternacao.exibirMenu();
                     break;
                 case 5:
+                    menuRelatorios.exibirMenu();
+                    break;
+                case 6:
                     rodando = false;
                     System.out.println("Salvando alterações e saindo...");
                     break;

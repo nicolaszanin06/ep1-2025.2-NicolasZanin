@@ -37,7 +37,10 @@ public class ConsultaRepository {
                         ? ""
                         : String.join("|", c.getPrescricoes());
 
-                String linha = String.join(SEP,String.valueOf(c.getId()),safe(c.getPaciente().getCpf()),safe(c.getMedico().getCrm()),c.getDataHora().format(FMT),escape(c.getLocal()),escape(c.getMotivo()),c.getStatus().name(),escape(c.getDiagnostico()),escape(prescricoesStr));
+                String linha = String.join(SEP, String.valueOf(c.getId()), safe(c.getPaciente().getCpf()),
+                        safe(c.getMedico().getCrm()), c.getDataHora().format(FMT), escape(c.getLocal()),
+                        escape(c.getMotivo()), c.getStatus().name(), escape(c.getDiagnostico()),
+                        escape(prescricoesStr));
                 bw.write(linha);
                 bw.newLine();
             }
@@ -47,8 +50,7 @@ public class ConsultaRepository {
     public List<Consulta> carregar(
             Path arquivo,
             Function<String, Paciente> findPaciente,
-            Function<String, Medico> findMedico
-    ) throws IOException {
+            Function<String, Medico> findMedico) throws IOException {
 
         List<Consulta> lista = new ArrayList<>();
         if (!Files.exists(arquivo)) {
@@ -63,7 +65,8 @@ public class ConsultaRepository {
 
             while ((linha = br.readLine()) != null) {
                 linha = linha.trim();
-                if (linha.isEmpty()) continue;
+                if (linha.isEmpty())
+                    continue;
 
                 if (primeira && linha.equalsIgnoreCase(HEADER)) {
                     primeira = false;
@@ -72,7 +75,8 @@ public class ConsultaRepository {
                 primeira = false;
 
                 String[] p = linha.split(SEP, -1);
-                if (p.length < 9) continue;
+                if (p.length < 9)
+                    continue;
 
                 int idLido = parseIntSafe(p[0], 0);
                 String cpf = p[1];
@@ -102,7 +106,8 @@ public class ConsultaRepository {
                 }
 
                 lista.add(c);
-                if (idLido > maxIdLido) maxIdLido = idLido;
+                if (idLido > maxIdLido)
+                    maxIdLido = idLido;
             }
         }
 
@@ -112,21 +117,36 @@ public class ConsultaRepository {
     // --- Helpers ---
 
     private static int parseIntSafe(String s, int def) {
-        try { return Integer.parseInt(s); } catch (Exception e) { return def; }
+        try {
+            return Integer.parseInt(s);
+        } catch (Exception e) {
+            return def;
+        }
     }
 
     private static LocalDateTime parseDateTimeSafe(String s, DateTimeFormatter fmt, LocalDateTime def) {
-        try { return LocalDateTime.parse(s, fmt); } catch (Exception e) { return def; }
+        try {
+            return LocalDateTime.parse(s, fmt);
+        } catch (Exception e) {
+            return def;
+        }
     }
 
     private static StatusConsulta parseStatusSafe(String s) {
-        try { return StatusConsulta.valueOf(s); } catch (Exception e) { return StatusConsulta.AGENDADA; }
+        try {
+            return StatusConsulta.valueOf(s);
+        } catch (Exception e) {
+            return StatusConsulta.AGENDADA;
+        }
     }
 
-    private static String safe(String s) { return s == null ? "" : s; }
+    private static String safe(String s) {
+        return s == null ? "" : s;
+    }
 
     private static String escape(String s) {
-        if (s == null) return "";
+        if (s == null)
+            return "";
         return s.replace(";", ",");
     }
 

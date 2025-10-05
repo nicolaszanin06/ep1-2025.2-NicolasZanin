@@ -43,6 +43,7 @@ public class MenuMedico {
             }
         }
     }
+
     private void cadastrarMedico() {
         System.out.println("\n--- Cadastrar Médico ---");
         String nome = util.Utilitario.lerString(sc, "Nome: ");
@@ -54,12 +55,14 @@ public class MenuMedico {
         gh.cadastrarMedicoValidador(new model.Medico(nome, idade, cpf, crm, esp, custo));
         System.out.println("Médico cadastrado.");
     }
+
     private void listarMedicos() {
         System.out.println("\n--- Lista de Médicos ---");
         for (model.Medico m : gh.getMedicos()) {
             System.out.println(m);
         }
     }
+
     private void removerMedico() {
         System.out.println("\n--- Remover Médico ---");
         String crm = util.Utilitario.lerString(sc, "> Digite o CRM do médico a ser removido: ");

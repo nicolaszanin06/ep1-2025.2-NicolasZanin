@@ -1,6 +1,5 @@
 package view;
 
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -70,19 +69,6 @@ public class MenuPaciente {
         }
     }
 
-    private int lerOpcaoMenu() {
-        while (true) {
-            try {
-                int opcao = sc.nextInt();
-                sc.nextLine();
-                return opcao;
-            } catch (InputMismatchException e) {
-                System.out.println("Entrada inválida. Por favor, digite um número.");
-                sc.nextLine();
-                System.out.print("> Escolha uma opção: ");
-            }
-        }
-    }
 
     private void cadastrarPacienteComum() {
         System.out.println("\n--- Cadastrar Paciente Comum ---");

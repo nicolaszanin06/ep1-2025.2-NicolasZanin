@@ -14,7 +14,6 @@ public class MenuInternacao {
     private final Scanner sc;
     private final GerenciadorHospitalar gh;
 
-
     public MenuInternacao(Scanner sc, GerenciadorHospitalar gh) {
         this.sc = sc;
         this.gh = gh;
@@ -80,6 +79,7 @@ public class MenuInternacao {
             System.out.println("Não foi possível registrar a internação (quarto ocupado?).");
         }
     }
+
     private void listarInternacoes() {
         System.out.println("--- Listar Internações ---");
         List<Internacao> lista = gh.getInternacoes();
@@ -97,6 +97,7 @@ public class MenuInternacao {
                     " | Alta = " + i.getDataAlta());
         }
     }
+
     private void darAlta() {
         System.out.println("--- Dar Alta ---");
         int id = Utilitario.lerInt(sc, "ID da internação: ");
@@ -108,6 +109,7 @@ public class MenuInternacao {
             System.out.println("Não foi possível registrar a alta (ID inválido ou já finalizada/cancelada).");
         }
     }
+
     private void cancelarInternacao() {
         System.out.println("--- Cancelar Internação ---");
         int id = Utilitario.lerInt(sc, "ID da internação: ");

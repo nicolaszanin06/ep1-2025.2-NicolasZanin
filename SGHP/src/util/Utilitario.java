@@ -48,7 +48,7 @@ public class Utilitario {
         }
     }
 
-    //Validador
+    // Validador
     public static boolean cpfValidador(String cpf) {
         return cpf != null && cpf.matches("\\d{11}");
     }

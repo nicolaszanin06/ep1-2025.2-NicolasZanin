@@ -31,8 +31,7 @@ public class MedicoRepository {
                         m.getCpf(),
                         m.getCrm(),
                         escape(m.getEspecialidade()),
-                        String.valueOf(m.getCustoConsulta())
-                );
+                        String.valueOf(m.getCustoConsulta()));
                 bw.write(linha);
                 bw.newLine();
             }
@@ -42,7 +41,7 @@ public class MedicoRepository {
     public List<Medico> carregar(Path arquivo) throws IOException {
         List<Medico> lista = new ArrayList<>();
         if (!Files.exists(arquivo)) {
-            return lista; 
+            return lista;
         }
 
         try (BufferedReader br = Files.newBufferedReader(arquivo)) {
@@ -51,8 +50,8 @@ public class MedicoRepository {
 
             while ((linha = br.readLine()) != null) {
                 linha = linha.trim();
-                if (linha.isEmpty()) continue;
-
+                if (linha.isEmpty())
+                    continue;
 
                 if (primeira && linha.equalsIgnoreCase(HEADER)) {
                     primeira = false;
@@ -61,7 +60,8 @@ public class MedicoRepository {
                 primeira = false;
 
                 String[] partes = linha.split(SEP, -1);
-                if (partes.length < 6) continue; // linha malformada
+                if (partes.length < 6)
+                    continue; // linha malformada
 
                 String nome = unescape(partes[0]);
                 int idade = parseIntSafe(partes[1], 0);
@@ -79,15 +79,24 @@ public class MedicoRepository {
     // --- Helpers ---
 
     private static int parseIntSafe(String s, int def) {
-        try { return Integer.parseInt(s); } catch (Exception e) { return def; }
+        try {
+            return Integer.parseInt(s);
+        } catch (Exception e) {
+            return def;
+        }
     }
 
     private static double parseDoubleSafe(String s, double def) {
-        try { return Double.parseDouble(s); } catch (Exception e) { return def; }
+        try {
+            return Double.parseDouble(s);
+        } catch (Exception e) {
+            return def;
+        }
     }
 
     private static String escape(String s) {
-        if (s == null) return "";
+        if (s == null)
+            return "";
         return s.replace(";", ",");
     }
 

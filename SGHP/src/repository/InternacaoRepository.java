@@ -41,8 +41,7 @@ public class InternacaoRepository {
                         dataAltaStr,
                         String.valueOf(i.getNumeroQuarto()),
                         String.valueOf(i.getCustoDiario()),
-                        String.valueOf(i.isCancelada())
-                );
+                        String.valueOf(i.isCancelada()));
                 bw.write(linha);
                 bw.newLine();
             }
@@ -53,11 +52,11 @@ public class InternacaoRepository {
     public List<Internacao> carregar(
             Path arquivo,
             Function<String, Paciente> findPaciente,
-            Function<String, Medico> findMedico
-    ) throws IOException {
+            Function<String, Medico> findMedico) throws IOException {
 
         List<Internacao> lista = new ArrayList<>();
-        if (!Files.exists(arquivo)) return lista;
+        if (!Files.exists(arquivo))
+            return lista;
 
         try (BufferedReader br = Files.newBufferedReader(arquivo)) {
             String linha;
@@ -65,7 +64,8 @@ public class InternacaoRepository {
 
             while ((linha = br.readLine()) != null) {
                 linha = linha.trim();
-                if (linha.isEmpty()) continue;
+                if (linha.isEmpty())
+                    continue;
 
                 if (primeira && linha.equalsIgnoreCase(HEADER)) {
                     primeira = false;
@@ -74,7 +74,8 @@ public class InternacaoRepository {
                 primeira = false;
 
                 String[] p = linha.split(SEP, -1);
-                if (p.length < 8) continue;
+                if (p.length < 8)
+                    continue;
 
                 int idLido = parseIntSafe(p[0], 0);
                 String cpf = p[1];
@@ -87,10 +88,12 @@ public class InternacaoRepository {
 
                 Paciente paciente = findPaciente.apply(cpf);
                 Medico medico = findMedico.apply(crm);
-                if (paciente == null || medico == null || dataInternacao == null) continue;
+                if (paciente == null || medico == null || dataInternacao == null)
+                    continue;
 
                 Internacao i = new Internacao(paciente, medico, dataInternacao, dataAlta, quarto, custoDiario);
-                if (cancelada) i.cancelarInternacao();
+                if (cancelada)
+                    i.cancelarInternacao();
                 lista.add(i);
             }
         }
@@ -99,12 +102,26 @@ public class InternacaoRepository {
 
     // --- Helpers ---
     private static int parseIntSafe(String s, int def) {
-        try { return Integer.parseInt(s); } catch (Exception e) { return def; }
+        try {
+            return Integer.parseInt(s);
+        } catch (Exception e) {
+            return def;
+        }
     }
+
     private static double parseDoubleSafe(String s, double def) {
-        try { return Double.parseDouble(s); } catch (Exception e) { return def; }
+        try {
+            return Double.parseDouble(s);
+        } catch (Exception e) {
+            return def;
+        }
     }
+
     private static LocalDateTime parseDateTimeSafe(String s, DateTimeFormatter fmt, LocalDateTime def) {
-        try { return LocalDateTime.parse(s, fmt); } catch (Exception e) { return def; }
+        try {
+            return LocalDateTime.parse(s, fmt);
+        } catch (Exception e) {
+            return def;
+        }
     }
 }
