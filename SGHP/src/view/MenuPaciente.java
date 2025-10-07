@@ -7,139 +7,106 @@ import model.Paciente;
 import model.PacienteEspecial;
 import model.enums.PlanoDeSaude;
 import service.GerenciadorHospitalar;
+import util.Utilitario;
 
 public class MenuPaciente {
-    private Scanner sc;
-    private GerenciadorHospitalar gh;
 
-    public MenuPaciente(Scanner sc, GerenciadorHospitalar gh) throws InterruptedException {
+    private final Scanner sc;
+    private final GerenciadorHospitalar gh;
+
+    public MenuPaciente(Scanner sc, GerenciadorHospitalar gh) {
         this.sc = sc;
         this.gh = gh;
     }
 
-    public void exibirMenu() throws InterruptedException {
+    public void exibirMenu() {
         boolean rodando = true;
         while (rodando) {
-            System.out.println("");
-            System.out.println("------ Menu Pacientes ------");
-            System.out.println("1. Cadastrar Paciente");
-            System.out.println("2. Listar Pacientes");
-            System.out.println("3. Remover Paciente");
-            System.out.println("4. Voltar ao Menu Principal");
-            System.out.println("----------------------------");
-            int op = util.Utilitario.lerInt(sc, "> Escolha uma opção: ");
+            System.out.println("""
+                    
+                    ------ Menu Pacientes ------
+                    1. Cadastrar Paciente
+                    2. Listar Pacientes
+                    3. Remover Paciente
+                    4. Voltar
+                    ----------------------------""");
+
+            int op = Utilitario.lerInt(sc, "> Escolha uma opção: ");
             switch (op) {
-                case 1:
-                    System.out.println();
-                    System.out.println("------ Cadastrar Paciente ------");
-                    System.out.println("1. Paciente Comum");
-                    System.out.println("2. Paciente Convênio");
-                    System.out.println("3. Voltar");
-                    System.out.println("-------------------------------");
-                    System.out.print("> Escolha uma opção: ");
-                    int tipoPaciente = sc.nextInt();
-                    switch (tipoPaciente) {
-                        case 1:
-                            cadastrarPacienteComum();
-                            break;
-                        case 2:
-                            cadastrarPacienteEspecial();
-                            break;
-                        case 3:
-                            new MenuPaciente(sc, gh);
-                            break;
-                        default:
-                            System.out.println("Opção inválida!");
-                            break;
-                    }
-                    break;
-                case 2:
-                    listarPacientes();
-                    break;
-                case 3:
-                    removerPaciente();
-                    break;
-                case 4:
-                    rodando = false;
-                    break;
-                default:
-                    System.out.println("Opção inválida!");
-                    break;
+                case 1 -> submenuCadastro();
+                case 2 -> listarPacientes();
+                case 3 -> removerPaciente();
+                case 4 -> rodando = false;
+                default -> System.out.println("Opção inválida!");
             }
         }
     }
 
+    private void submenuCadastro() {
+        System.out.println("""
+                ------ Cadastrar Paciente ------
+                1. Paciente Comum
+                2. Paciente Convênio
+                3. Voltar
+                -------------------------------""");
+        int tipo = Utilitario.lerInt(sc, "> Escolha uma opção: ");
+        switch (tipo) {
+            case 1 -> cadastrarPacienteComum();
+            case 2 -> cadastrarPacienteEspecial();
+            case 3 -> {} // apenas volta
+            default -> System.out.println("Opção inválida!");
+        }
+    }
 
     private void cadastrarPacienteComum() {
         System.out.println("\n--- Cadastrar Paciente Comum ---");
-        sc.nextLine();
-        System.out.print("> Nome: ");
-        String nome = sc.nextLine();
-        System.out.print("> Idade: ");
-        int idade = sc.nextInt();
-        System.out.print("> CPF: ");
-        sc.nextLine();
-        String cpf = sc.nextLine();
-        if (!util.Utilitario.cpfValidador(cpf)) {
-            System.out.println("CPF inválido. Verifique o número de dígitos. ");
+        String nome = Utilitario.lerString(sc, "> Nome: ");
+        int idade = Utilitario.lerInt(sc, "> Idade: ");
+        String cpf = Utilitario.lerString(sc, "> CPF: ");
+
+        if (!Utilitario.cpfValidador(cpf)) {
+            System.out.println("CPF inválido. Verifique o número de dígitos.");
             return;
         }
-        Paciente novoPaciente = new Paciente(nome, idade, cpf);
-        gh.cadastrarPacienteValidador(novoPaciente);
+        gh.cadastrarPacienteValidador(new Paciente(nome, idade, cpf));
     }
 
     private void cadastrarPacienteEspecial() {
         System.out.println("\n--- Cadastrar Paciente Convênio ---");
-        sc.nextLine();
-        System.out.print("> Nome: ");
-        String nome = sc.nextLine();
-        System.out.print("> Idade: ");
-        int idade = sc.nextInt();
-        System.out.print("> CPF: ");
-        sc.nextLine();
-        String cpf = sc.nextLine();
-        if (!util.Utilitario.cpfValidador(cpf)) {
-            System.out.println("CPF inválido. Verifique o número de dígitos. ");
+        String nome = Utilitario.lerString(sc, "> Nome: ");
+        int idade = Utilitario.lerInt(sc, "> Idade: ");
+        String cpf = Utilitario.lerString(sc, "> CPF: ");
+
+        if (!Utilitario.cpfValidador(cpf)) {
+            System.out.println("CPF inválido. Verifique o número de dígitos.");
             return;
         }
-        System.out.println("--- Planos de Saúdes válidos ---");
+
+        System.out.println("--- Planos de Saúde ---");
         for (PlanoDeSaude plano : PlanoDeSaude.values()) {
-            System.out.println(
-                    plano.getCodigo() + ". " + plano.getNome() + " (Desconto: " + (plano.getDesconto() * 100) + "%)");
+            System.out.printf("%d. %s (Desconto: %.0f%%)%n",
+                    plano.getCodigo(), plano.getNome(), plano.getDesconto() * 100);
         }
-        System.out.print("> Escolha o código do plano de saúde: ");
-        int codigoPlano = sc.nextInt();
-        PlanoDeSaude planoEscolhido;
+
+        int codigo = Utilitario.lerInt(sc, "> Código do plano: ");
         try {
-            planoEscolhido = PlanoDeSaude.getPorCodigo(codigoPlano);
+            PlanoDeSaude plano = PlanoDeSaude.getPorCodigo(codigo);
+            gh.cadastrarPacienteValidador(new PacienteEspecial(nome, idade, cpf, plano));
         } catch (IllegalArgumentException e) {
             System.out.println("Código de plano inválido. Cadastro cancelado.");
-            return;
         }
-        PacienteEspecial novoPacienteEspecial = new PacienteEspecial(nome, idade, cpf, planoEscolhido);
-        gh.cadastrarPacienteValidador(novoPacienteEspecial);
-
     }
 
     private void listarPacientes() {
-        System.out.println("--- Lista de Pacientes ---");
-        List<model.Paciente> pacientes = gh.getPacientes();
-        if (pacientes.isEmpty()) {
-            System.out.println("Nenhum paciente cadastrado.");
-        } else {
-            for (model.Paciente p : pacientes) {
-                System.out.println(p);
-            }
-        }
+        System.out.println("\n--- Lista de Pacientes ---");
+        List<Paciente> lista = gh.getPacientes();
+        if (lista.isEmpty()) System.out.println("Nenhum paciente cadastrado.");
+        else lista.forEach(System.out::println);
     }
 
     private void removerPaciente() {
         System.out.println("\n--- Remover Paciente ---");
-        String cpf = util.Utilitario.lerString(sc, "> Digite o CPF do paciente a ser removido: ");
-        boolean removido = gh.removerPaciente(cpf);
-        if (removido) {
-        } else {
-            System.out.println("Paciente não encontrado.");
-        }
+        String cpf = Utilitario.lerString(sc, "> CPF do paciente: ");
+        if (!gh.removerPaciente(cpf)) System.out.println("Paciente não encontrado.");
     }
 }

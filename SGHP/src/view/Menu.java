@@ -2,64 +2,56 @@ package view;
 
 import java.util.Scanner;
 import service.GerenciadorHospitalar;
+import util.Utilitario;
 
 public class Menu {
-    private Scanner sc = new Scanner(System.in);
-    private GerenciadorHospitalar gh;
-    private MenuPaciente menuPaciente;
-    private MenuMedico menuMedico;
-    private MenuConsulta menuConsulta;
-    private MenuInternacao menuInternacao;
-    private MenuRelatorios menuRelatorios;
+
+    private final Scanner sc;
+    private final GerenciadorHospitalar gh;
+    private final MenuPaciente menuPaciente;
+    private final MenuMedico menuMedico;
+    private final MenuConsulta menuConsulta;
+    private final MenuInternacao menuInternacao;
+    private final MenuRelatorios menuRelatorios;
 
     public Menu(Scanner sc, GerenciadorHospitalar gh) throws InterruptedException {
         this.sc = sc;
         this.gh = gh;
-        this.menuPaciente = new MenuPaciente(sc, gh);
-        this.menuMedico = new MenuMedico(sc, gh);
-        this.menuConsulta = new MenuConsulta(sc, gh);
-        this.menuInternacao = new MenuInternacao(sc, gh);
-        this.menuRelatorios = new MenuRelatorios(sc, gh);
-
+        menuPaciente = new MenuPaciente(sc, gh);
+        menuMedico = new MenuMedico(sc, gh);
+        menuConsulta = new MenuConsulta(sc, gh);
+        menuInternacao = new MenuInternacao(sc, gh);
+        menuRelatorios = new MenuRelatorios(sc, gh);
     }
 
     public void exibirMenu() throws InterruptedException {
         boolean rodando = true;
         while (rodando) {
-            System.out.println("");
-            System.out.println("------ Menu Principal ------");
-            System.out.println("1. Gerenciar Pacientes");
-            System.out.println("2. Gerenciar Médicos");
-            System.out.println("3. Gerenciar Consultas");
-            System.out.println("4. Gerenciar Internações");
-            System.out.println("5. Relatórios");
-            System.out.println("6. Sair");
-            System.out.println("---------------------------");
-            int op = util.Utilitario.lerInt(sc, "> Escolha uma opção: ");
+            System.out.println("""
+                    \n------ Menu Principal ------
+                    1. Gerenciar Pacientes
+                    2. Gerenciar Médicos
+                    3. Gerenciar Consultas
+                    4. Gerenciar Internações
+                    5. Relatórios
+                    6. Sair
+                    ---------------------------""");
 
+            int op = Utilitario.lerInt(sc, "> Escolha uma opção: ");
             switch (op) {
-                case 1:
-                    menuPaciente.exibirMenu();
-                    break;
-                case 2:
-                    menuMedico.exibirMenu();
-                    break;
-                case 3:
-                    menuConsulta.exibirMenu();
-                    break;
-                case 4:
-                    menuInternacao.exibirMenu();
-                    break;
-                case 5:
-                    menuRelatorios.exibirMenu();
-                    break;
-                case 6:
+                case 1 -> menuPaciente.exibirMenu();
+                case 2 -> menuMedico.exibirMenu();
+                case 3 -> menuConsulta.exibirMenu();
+                case 4 -> menuInternacao.exibirMenu();
+                case 5 -> menuRelatorios.exibirMenu();
+                case 6 -> {
                     rodando = false;
                     System.out.println("Salvando alterações e saindo...");
-                    break;
-                default:
-                    System.out.println("Opção inválida! Tente Novamente.");
+                }
+                default -> {
+                    System.out.println("Opção inválida! Tente novamente.");
                     Thread.sleep(500);
+                }
             }
         }
     }
