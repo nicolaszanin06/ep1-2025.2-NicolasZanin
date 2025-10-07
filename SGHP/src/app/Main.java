@@ -15,12 +15,13 @@ public class Main {
             System.out.println("Bem-vindo(a) ao Sistema de Gerenciamento Hospitalar!");
             System.out.print("Carregando o menu");
             // Animação de Loading
-            Thread.sleep(700);
+            Thread.sleep(500);
             System.out.print(".");
-            Thread.sleep(700);
+            Thread.sleep(500);
             System.out.print(".");
-            Thread.sleep(700);
+            Thread.sleep(500);
             System.out.println(".");
+            Thread.sleep(200);
 
             // Carregar arquivos
             DataCarrega.loadAll(gh);

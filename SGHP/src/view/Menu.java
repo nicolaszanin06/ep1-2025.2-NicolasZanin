@@ -58,8 +58,8 @@ public class Menu {
                     System.out.println("Salvando alterações e saindo...");
                     break;
                 default:
-                    System.out.println("Opção inválida!");
-                    Thread.sleep(1000);
+                    System.out.println("Opção inválida! Tente Novamente.");
+                    Thread.sleep(500);
             }
         }
     }

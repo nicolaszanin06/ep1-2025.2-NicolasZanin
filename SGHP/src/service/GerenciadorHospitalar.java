@@ -10,25 +10,12 @@ import model.Consulta;
 import model.Internacao;
 
 public class GerenciadorHospitalar {
-    private List<Paciente> pacientes;
-    private List<Medico> medicos;
-    private List<Consulta> consultas;
-    private List<Internacao> internacoes;
+    private final List<Paciente> pacientes = new ArrayList<>();
+    private final List<Medico> medicos = new ArrayList<>();
+    private final List<Consulta> consultas = new ArrayList<>();
+    private final List<Internacao> internacoes = new ArrayList<>();
 
-    public GerenciadorHospitalar() {
-        this.pacientes = new java.util.ArrayList<>();
-        this.medicos = new java.util.ArrayList<>();
-        this.consultas = new java.util.ArrayList<>();
-        this.internacoes = new ArrayList<>();
-    }
-
-    public GerenciadorHospitalar(List<Paciente> pacientes, List<Medico> medicos, List<Consulta> consultas) {
-        this.pacientes = pacientes;
-        this.medicos = medicos;
-        this.consultas = consultas;
-    }
-
-    // Métodos com Validadores
+    // Métodos Pacientes
 
     public boolean cadastrarPacienteValidador(Paciente paciente) {
         if (buscarPacientePorCPF(paciente.getCpf()) != null) {
@@ -40,35 +27,6 @@ public class GerenciadorHospitalar {
         return true;
     }
 
-    public boolean cadastrarMedicoValidador(Medico medico) {
-        if (buscarMedicoPorCRM(medico.getCrm()) != null) {
-            System.out.println("Erro: Já existe médico com CRM " + medico.getCrm());
-            return false;
-        }
-        medicos.add(medico);
-        System.out.println("Médico cadastrado com sucesso: " + medico.getNome());
-        return true;
-    }
-
-    public void agendarConsulta(Consulta consulta) {
-        for (Consulta c : consultas) {
-            boolean mesmoHorario = c.getDataHora().equals(consulta.getDataHora());
-            if (mesmoHorario && c.getMedico().equals(consulta.getMedico())) {
-                System.out.println(
-                        "ERRO: O médico " + consulta.getMedico().getNome() + " já possui uma consulta neste horário.");
-                return;
-            }
-            if (mesmoHorario && c.getLocal().equalsIgnoreCase(consulta.getLocal())) {
-                System.out.println(
-                        "ERRO: O local '" + consulta.getLocal() + "' já está ocupado neste horário.");
-                return;
-            }
-        }
-        consultas.add(consulta);
-        System.out.println("Consulta agendada com sucesso para o paciente " + consulta.getPaciente().getNome() +
-                " com o médico " + consulta.getMedico().getNome() + " em " + consulta.getDataHora());
-    }
-
     public Paciente buscarPacientePorCPF(String cpf) {
         for (Paciente p : pacientes) {
             if (p.getCpf().equals(cpf)) {
@@ -78,68 +36,6 @@ public class GerenciadorHospitalar {
         return null;
     }
 
-    public Medico buscarMedicoPorCRM(String crm) {
-        for (Medico m : medicos) {
-            if (m.getCrm().equals(crm)) {
-                return m;
-            }
-        }
-        return null;
-    }
-
-    // Métodos relacionados a consultas -----------------------------------------
-    public Consulta getConsultaByIndex(int index) {
-        if (index >= 0 && index < consultas.size()) {
-            return consultas.get(index);
-        }
-        return null;
-    }
-
-    public boolean realizarConsulta(int index, String diagnostico, List<String> prescricoes) {
-        Consulta consulta = getConsultaByIndex(index);
-        if (consulta != null && consulta.getStatus() == StatusConsulta.AGENDADA) {
-            consulta.setDiagnostico(diagnostico);
-            consulta.setPrescricoes(prescricoes);
-            consulta.setStatus(StatusConsulta.REALIZADA);
-            System.out.println("Consulta de " + consulta.getPaciente().getNome() + " realizada com sucesso.");
-            return true;
-        }
-        System.out.println("Erro: Consulta não encontrada ou não pode ser realizada (status: "
-                + (consulta != null ? consulta.getStatus() : "N/A") + ").");
-        return false;
-    }
-
-    public boolean cancelarConsulta(int index) {
-        Consulta consulta = getConsultaByIndex(index);
-        if (consulta != null && consulta.getStatus() == StatusConsulta.AGENDADA) {
-            consulta.setStatus(StatusConsulta.CANCELADA);
-            System.out.println("Consulta de " + consulta.getPaciente().getNome() + " cancelada com sucesso.");
-            return true;
-        }
-        System.out.println("Erro: Consulta não encontrada ou não pode ser cancelada (status: "
-                + (consulta != null ? consulta.getStatus() : "N/A") + ").");
-        return false;
-    }
-
-    // Métodos para listar pacientes, médicos, consultas e internações
-    // -----------------------------------------
-    public List<Paciente> getPacientes() {
-        return pacientes;
-    }
-
-    public List<Medico> getMedicos() {
-        return medicos;
-    }
-
-    public List<Consulta> getConsultas() {
-        return consultas;
-    }
-
-    public List<Internacao> getInternacoes() {
-        return internacoes;
-    }
-
-    // Métodos relacionados a Pacientes -----------------------------------------
     public boolean atualizarPaciente(String cpf, String novoNome, int novaIdade) {
         Paciente paciente = buscarPacientePorCPF(cpf);
         if (paciente != null) {
@@ -173,16 +69,25 @@ public class GerenciadorHospitalar {
         return false;
     }
 
-    // Métodos relacionados a Médicos -----------------------------------------
-    public boolean criarMedico(String nome, int idade, String cpf, String crm, String especialidade,
-            int custoConsulta) {
-        if (buscarMedicoPorCRM(crm) == null) {
-            Medico novoMedico = new Medico(nome, idade, cpf, crm, especialidade, custoConsulta);
-            cadastrarMedicoValidador(novoMedico);
-            return true;
+    // Métodos Médicos
+
+    public boolean cadastrarMedicoValidador(Medico medico) {
+        if (buscarMedicoPorCRM(medico.getCrm()) != null) {
+            System.out.println("Erro: Já existe médico com CRM " + medico.getCrm());
+            return false;
         }
-        System.out.println("Erro: Já existe um médico com o CRM " + crm);
-        return false;
+        medicos.add(medico);
+        System.out.println("Médico cadastrado com sucesso: " + medico.getNome());
+        return true;
+    }
+
+    public Medico buscarMedicoPorCRM(String crm) {
+        for (Medico m : medicos) {
+            if (m.getCrm().equals(crm)) {
+                return m;
+            }
+        }
+        return null;
     }
 
     public boolean atualizarMedico(String crm, String novoNome, int novaIdade, String novaEspecialidade,
@@ -211,7 +116,79 @@ public class GerenciadorHospitalar {
         return false;
     }
 
-    // Métodos relacionados a Internações
+    public boolean criarMedico(String nome, int idade, String cpf, String crm, String especialidade,
+            int custoConsulta) {
+        if (buscarMedicoPorCRM(crm) == null) {
+            Medico novoMedico = new Medico(nome, idade, cpf, crm, especialidade, custoConsulta);
+            cadastrarMedicoValidador(novoMedico);
+            return true;
+        }
+        System.out.println("Erro: Já existe um médico com o CRM " + crm);
+        return false;
+    }
+
+    // Métodos Consultas
+    public void agendarConsulta(Consulta consulta) {
+        for (Consulta c : consultas) {
+            boolean mesmoHorario = c.getDataHora().equals(consulta.getDataHora());
+            if (mesmoHorario && c.getMedico().equals(consulta.getMedico())) {
+                System.out.println(
+                        "ERRO: O médico " + consulta.getMedico().getNome() + " já possui uma consulta neste horário.");
+                return;
+            }
+            if (mesmoHorario && c.getLocal().equalsIgnoreCase(consulta.getLocal())) {
+                System.out.println(
+                        "ERRO: O local '" + consulta.getLocal() + "' já está ocupado neste horário.");
+                return;
+            }
+        }
+        consultas.add(consulta);
+        System.out.println("Consulta agendada com sucesso para o paciente " + consulta.getPaciente().getNome() +
+                " com o médico " + consulta.getMedico().getNome() + " em " + consulta.getDataHora());
+    }
+
+    public boolean realizarConsulta(int index, String diagnostico, List<String> prescricoes) {
+        Consulta consulta = getConsultaByIndex(index);
+        if (consulta != null && consulta.getStatus() == StatusConsulta.AGENDADA) {
+            consulta.setDiagnostico(diagnostico);
+            consulta.setPrescricoes(prescricoes);
+            consulta.setStatus(StatusConsulta.REALIZADA);
+            System.out.println("Consulta de " + consulta.getPaciente().getNome() + " realizada com sucesso.");
+            return true;
+        }
+        System.out.println("Erro: Consulta não encontrada ou não pode ser realizada (status: "
+                + (consulta != null ? consulta.getStatus() : "N/A") + ").");
+        return false;
+    }
+
+    public boolean cancelarConsulta(int index) {
+        Consulta consulta = getConsultaByIndex(index);
+        if (consulta != null && consulta.getStatus() == StatusConsulta.AGENDADA) {
+            consulta.setStatus(StatusConsulta.CANCELADA);
+            System.out.println("Consulta de " + consulta.getPaciente().getNome() + " cancelada com sucesso.");
+            return true;
+        }
+        System.out.println("Erro: Consulta não encontrada ou não pode ser cancelada (status: "
+                + (consulta != null ? consulta.getStatus() : "N/A") + ").");
+        return false;
+    }
+
+    private Consulta getConsultaByIndex(int index) {
+        if (index >= 0 && index < consultas.size()) {
+            return consultas.get(index);
+        }
+        return null;
+    }
+
+    public Consulta buscarConsultaPorId(int id) {
+        for (Consulta c : consultas) {
+            if (c.getId() == id)
+                return c;
+        }
+        return null;
+    }
+
+    // Métodos Internações
     public void podeInternar(int numeroQuarto) {
         for (Internacao i : internacoes) {
             if (i.getNumeroQuarto() == numeroQuarto && i.estaAtiva()) {
@@ -261,21 +238,29 @@ public class GerenciadorHospitalar {
 
     }
 
-    // Busca por ID da internação
-    public Consulta buscarConsultaPorId(int id) {
-        for (Consulta c : consultas) {
-            if (c.getId() == id)
-                return c;
-        }
-        return null;
-    }
-
     public Internacao buscarInternacaoPorId(int id) {
         for (Internacao i : internacoes) {
             if (i.getId() == id)
                 return i;
         }
         return null;
+    }
+
+    // Métodos para listar pacientes, médicos, consultas e internações
+    public List<Paciente> getPacientes() {
+        return pacientes;
+    }
+
+    public List<Medico> getMedicos() {
+        return medicos;
+    }
+
+    public List<Consulta> getConsultas() {
+        return consultas;
+    }
+
+    public List<Internacao> getInternacoes() {
+        return internacoes;
     }
 
 }

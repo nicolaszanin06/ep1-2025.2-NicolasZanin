@@ -2,7 +2,7 @@ package util;
 
 import java.util.Scanner;
 
-public class Utilitario {
+public final class Utilitario {
 
     private Utilitario() {
     }
@@ -10,7 +10,7 @@ public class Utilitario {
     public static int lerInt(Scanner sc, String mensagem) {
         System.out.print(mensagem);
         while (!sc.hasNextInt()) {
-            System.out.print("Entrada inválida. " + mensagem);
+            System.out.print("Entrada inválida.\n" + mensagem);
             sc.next();
         }
         int v = sc.nextInt();
@@ -32,7 +32,7 @@ public class Utilitario {
 
     public static String lerString(Scanner sc, String mensagem) {
         System.out.print(mensagem);
-        return sc.nextLine();
+        return sc.nextLine().trim();
     }
 
     public static java.time.LocalDateTime lerDataHora(Scanner sc, String mensagem) {

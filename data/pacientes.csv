@@ -1,1 +1,5 @@
 tipo;nome;idade;cpf;planoCodigo
+COMUM;Arthur Silva;18;12345678900;-
+ESPECIAL;Beatriz Silva;30;98765432100;2
+COMUM;Ana Lima;22;33333333333;-
+ESPECIAL;Pedro Alves;45;44444444444;5
