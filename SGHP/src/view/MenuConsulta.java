@@ -25,8 +25,7 @@ public class MenuConsulta {
     public void exibirMenu() {
         boolean rodando = true;
         while (rodando) {
-            System.out.println("""
-                    
+            System.out.println("""                   
                     ------ Menu Consultas ------
                     1. Agendar Consulta
                     2. Listar Consultas
@@ -81,8 +80,8 @@ public class MenuConsulta {
         String motivo = Utilitario.lerString(sc, "> Motivo da consulta: ");
 
         Consulta nova = new Consulta(paciente, medico, dataHora, local, motivo);
-        gh.agendarConsulta(nova);               // gerenciador já checa conflitos
-        paciente.adicionarConsulta(nova);       // mantém histórico no paciente
+        gh.agendarConsulta(nova);
+        paciente.adicionarConsulta(nova);
         System.out.println("Consulta agendada para " + paciente.getNome() +
                 " com Dr(a). " + medico.getNome() +
                 " em " + dataHora.format(java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
