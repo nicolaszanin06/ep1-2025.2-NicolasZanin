@@ -20,16 +20,30 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
 ## Instruções para Compilação e Execução
 
 1. **Compilação:**  
-   [Descrever aqui como compilar o projeto. Exemplo: `javac Main.java` ou o script usado]
+   Compile o programa na pasta anterior a SGHP
+   javac -cp SGHP\src -d bin SGHP\src\app\Main.java
 
 2. **Execução:**  
-   [Descrever aqui como executar o projeto. Exemplo: `java Main` ou o script usado]
+   Caso esteja utilizando uma IDE: Para executar o projeto basta inicializar a Classe Main, dentro do pacote App
+   Caso queira iniciar pelo terminal do PC:
+   java -cp "SGHP\bin" app.Main
 
-3. **Estrutura de Pastas:**  
-   [Descrever aqui as principais pastas do projeto]
+
+3. **Estrutura de Pastas:**
+
+   --SGHP
+      --SRC
+         --App (Pacote da classe Main)
+         --Model (Classe das entidades do programa)
+            --Enum (Entidades enumeradas, Plano de Saúde e Status Consulta)
+         --Repository (Savalmento e Leitura dos dados)
+         --Service (Lógica do programa)
+         --Util (métodos úteis, persistencia e etc)
+         --View (Contém as classes visuais do programa, os menus.)
+      --Data (Onde são salvo os dados em CSV)
 
 3. **Versão do JAVA utilizada:**  
-   Java 24
+   Java 24.0.2
 
 ---
 
@@ -56,8 +70,8 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
 
 ## Observações (Extras ou Dificuldades)
 
-- [Espaço para o aluno comentar qualquer funcionalidade extra que implementou, dificuldades enfrentadas, ou considerações importantes.]
-
+A principal dificuldade ao criar o programa foi em criar os repositórios dos dados, um assunto completamente novo para mim, além da
+dificuldade em garantir a consistência de consultas com a subclasse Paciente Especial.
 ---
 
 ## Contato

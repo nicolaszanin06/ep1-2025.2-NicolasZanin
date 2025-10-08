@@ -96,13 +96,13 @@ public class Internacao {
     @Override
     public String toString() {
         return "Internacao{" +
-                "paciente=" + paciente.getNome() +
-                ", medico=" + medico.getNome() +
-                ", dataInternacao=" + dataInternacao +
-                ", dataAlta=" + dataAlta +
-                ", numeroQuarto=" + numeroQuarto +
-                ", custoDiario=" + custoDiario +
-                ", cancelada=" + cancelada +
+                "paciente= " + paciente.getNome() +
+                ", medico = " + medico.getNome() +
+                ", dataInternacao = " + dataInternacao +
+                ", dataAlta = " + dataAlta +
+                ", numeroQuarto = " + numeroQuarto +
+                ", custoDiario = " + custoDiario +
+                ", cancelada = " + cancelada +
                 '}';
     }
 }

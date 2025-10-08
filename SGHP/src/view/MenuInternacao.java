@@ -67,7 +67,7 @@ public class MenuInternacao {
             return;
         }
         lista.forEach(i -> System.out.printf(
-                "ID=%d | Paciente=%s | Médico=%s | Quarto=%d | Ativa=%s | Entrada=%s | Alta=%s%n",
+                "ID = %d, Paciente = %s, Médico(a) = %s, Quarto = %d,Ativa = %s, Entrada = %s, Alta = %s%n",
                 i.getId(),
                 i.getPaciente().getNome(),
                 i.getMedico().getNome(),

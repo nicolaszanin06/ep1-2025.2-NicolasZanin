@@ -1,4 +1,6 @@
 nome;idade;cpf;crm;especialidade;custoConsulta
-Carlos Mendes;45;55555555555;CRM1001;Cardiologia;300.0
-Laura Pires;39;66666666666;CRM1002;Clínico Geral;200.0
-Rafael Tavares;50;77777777777;CRM1003;Ortopedia;250.0
+Paulo Mendes;50;12312312300;CRM001;Cardiologia;300.0
+Ana Rocha;41;32132132100;CRM002;Pediatria;250.0
+Roberto Lima;39;45645645600;CRM003;Ortopedia;280.0
+Júlia Alves;47;65465465400;CRM004;Dermatologia;200.0
+Eduardo Braga;60;78978978900;CRM005;Neurologia;350.0

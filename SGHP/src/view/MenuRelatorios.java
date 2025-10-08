@@ -25,6 +25,7 @@ public class MenuRelatorios {
         public void exibirMenu() {
                 while (true) {
                         System.out.println("""
+
                                         ------ Relatórios ------
                                         1. Pacientes
                                         2. Médicos
@@ -52,7 +53,7 @@ public class MenuRelatorios {
         // 1) Pacientes com histórico
         private void pacientesHistorico() {
                 gh.getPacientes().forEach(p -> {
-                        System.out.println("• " + p.getNome() + " (CPF " + p.getCpf() + ")");
+                        System.out.println(p.getNome() + " (CPF " + p.getCpf() + ")");
                         var consultas = gh.getConsultas().stream()
                                         .filter(c -> c.getPaciente().equals(p)).toList();
                         var internacoes = gh.getInternacoes().stream()
@@ -74,12 +75,12 @@ public class MenuRelatorios {
                                         .filter(c -> c.getMedico().equals(m)).toList();
                         long realizadas = consultas.stream()
                                         .filter(c -> c.getStatus() == StatusConsulta.REALIZADA).count();
-                        System.out.println("• " + m.getNome() + " — " + m.getEspecialidade()
+                        System.out.println(m.getNome() + " - " + m.getEspecialidade()
                                         + " | Realizadas: " + realizadas);
                         consultas.stream()
                                         .filter(c -> c.getDataHora().isAfter(LocalDateTime.now()))
                                         .sorted(Comparator.comparing(Consulta::getDataHora))
-                                        .forEach(c -> System.out.println("   " + c.getDataHora().format(FMT)
+                                        .forEach(c -> System.out.println("-->" + c.getDataHora().format(FMT)
                                                         + " | " + c.getPaciente().getNome()));
                 });
         }
@@ -126,7 +127,7 @@ public class MenuRelatorios {
                         System.out.println("Nenhuma internação ativa.");
                         return;
                 }
-                ativas.forEach(i -> System.out.println("• " + i.getPaciente().getNome()
+                ativas.forEach(i -> System.out.println(i.getPaciente().getNome()
                                 + " | Quarto " + i.getNumeroQuarto()
                                 + " | Dias=" + i.getTempoDeInternacao()));
         }
@@ -138,13 +139,13 @@ public class MenuRelatorios {
                                 .filter(c -> c.getStatus() == StatusConsulta.REALIZADA)
                                 .collect(Collectors.groupingBy(c -> c.getMedico().getNome(), Collectors.counting()));
                 porMedico.entrySet().stream().max(Map.Entry.comparingByValue())
-                                .ifPresent(e -> System.out.println("• Médico que mais atendeu: " + e.getKey() + " ("
+                                .ifPresent(e -> System.out.println("Médico que mais atendeu: " + e.getKey() + " ("
                                                 + e.getValue() + ")"));
                 var porEsp = gh.getConsultas().stream()
                                 .collect(Collectors.groupingBy(c -> c.getMedico().getEspecialidade(),
                                                 Collectors.counting()));
                 porEsp.entrySet().stream().max(Map.Entry.comparingByValue())
-                                .ifPresent(e -> System.out.println("• Especialidade mais procurada: " + e.getKey()
+                                .ifPresent(e -> System.out.println("Especialidade mais procurada: " + e.getKey()
                                                 + " (" + e.getValue() + ")"));
         }
 
@@ -157,11 +158,11 @@ public class MenuRelatorios {
                         System.out.println("Nenhum paciente com convênio.");
                         return;
                 }
-                System.out.println("• Quantidade por plano:");
+                System.out.println("Quantidade por plano:");
                 pacientesEsp.stream()
                                 .collect(Collectors.groupingBy(p -> p.getPlanoSaude().getNome(), Collectors.counting()))
                                 .forEach((plano, qtd) -> System.out.println("  " + plano + ": " + qtd));
-                System.out.println("• Economia total por plano (R$):");
+                System.out.println("Economia total por plano (R$):");
                 gh.getConsultas().stream()
                                 .filter(c -> c.getStatus() == StatusConsulta.REALIZADA
                                                 && c.getPaciente() instanceof PacienteEspecial)

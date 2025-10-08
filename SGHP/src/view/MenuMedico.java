@@ -37,7 +37,7 @@ public class MenuMedico {
             }
         }
     }
-
+    
     private void cadastrarMedico() {
         System.out.println("\n--- Cadastrar Médico ---");
         String nome = Utilitario.lerString(sc, "> Nome: ");

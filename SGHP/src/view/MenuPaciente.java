@@ -44,6 +44,7 @@ public class MenuPaciente {
 
     private void submenuCadastro() {
         System.out.println("""
+            
                 ------ Cadastrar Paciente ------
                 1. Paciente Comum
                 2. Paciente Convênio

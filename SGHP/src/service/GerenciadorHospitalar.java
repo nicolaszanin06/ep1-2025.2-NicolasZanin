@@ -143,8 +143,6 @@ public class GerenciadorHospitalar {
             }
         }
         consultas.add(consulta);
-        System.out.println("Consulta agendada com sucesso para o paciente " + consulta.getPaciente().getNome() +
-                " com o médico " + consulta.getMedico().getNome() + " em " + consulta.getDataHora());
     }
 
     public boolean realizarConsulta(int index, String diagnostico, List<String> prescricoes) {

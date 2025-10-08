@@ -1,1 +1,6 @@
 id;cpfPaciente;crmMedico;dataHora;local;motivo;status;diagnostico;prescricoes
+1;12345678901;CRM001;15-10-2025 09:00;Sala 201;Check-up anual;REALIZADA;Pressão alta;Losartana 50mg
+2;98765432100;CRM002;16-10-2025 14:00;Sala 105;Consulta pediátrica;AGENDADA;;
+3;11122233344;CRM003;10-09-2025 11:30;Sala 110;Dor no joelho;REALIZADA;Artrose leve;Condroitina, Fisioterapia
+4;55566677788;CRM004;20-10-2025 13:00;Sala 220;Lesão de pele;AGENDADA;;
+5;99988877766;CRM005;05-09-2025 10:00;Sala 302;Enxaqueca crônica;REALIZADA;Cefaleia tensional;Paracetamol, Repouso

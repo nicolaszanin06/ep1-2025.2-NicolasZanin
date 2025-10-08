@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
         GerenciadorHospitalar gh = new GerenciadorHospitalar();
-
+        System.out.println("Data dir: " + util.DataArquivos.dir().toAbsolutePath());
         {
             System.out.println("Bem-vindo(a) ao Sistema de Gerenciamento Hospitalar!");
             System.out.print("Carregando o menu");

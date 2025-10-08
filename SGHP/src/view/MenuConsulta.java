@@ -25,7 +25,8 @@ public class MenuConsulta {
     public void exibirMenu() {
         boolean rodando = true;
         while (rodando) {
-            System.out.println("""                   
+            System.out.println("""  
+
                     ------ Menu Consultas ------
                     1. Agendar Consulta
                     2. Listar Consultas
