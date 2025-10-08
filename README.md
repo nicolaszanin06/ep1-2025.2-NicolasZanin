@@ -21,12 +21,17 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
 
 1. **Compilação:**  
    Compile o programa na pasta anterior a SGHP
+
+   ~~~
    javac -cp SGHP\src -d bin SGHP\src\app\Main.java
+   ~~~
 
 2. **Execução:**  
    Caso esteja utilizando uma IDE: Para executar o projeto basta inicializar a Classe Main, dentro do pacote App
    Caso queira iniciar pelo terminal do PC:
-   java -cp "SGHP\bin" app.Main
+   ~~~
+   java -cp bin app.Main
+   ~~~
 
 
 3. **Estrutura de Pastas:**
@@ -61,7 +66,7 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
 2. Cadastro de Médico:  
    ![Inserir Print 2](caminho/do/print2.png)
 
-3. Relatório de ?:  
+3. Relatório de Consultas:  
    ![Inserir Print 3](caminho/do/print3.png)
 
 ---

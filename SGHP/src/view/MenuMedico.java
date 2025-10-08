@@ -47,8 +47,7 @@ public class MenuMedico {
         String esp = Utilitario.lerString(sc, "> Especialidade: ");
         double custo = Utilitario.lerDouble(sc, "> Custo da Consulta: ");
 
-        gh.cadastrarMedicoValidador(new Medico(nome, idade, cpf, crm, esp, custo));
-        System.out.println("Médico cadastrado com sucesso.");
+        gh.cadastrarMedicoValidador(new Medico(nome, idade, cpf, crm, esp, custo));;
     }
 
     private void listarMedicos() {
@@ -64,8 +63,7 @@ public class MenuMedico {
     private void removerMedico() {
         System.out.println("\n--- Remover Médico ---");
         String crm = Utilitario.lerString(sc, "> CRM do médico: ");
-        if (gh.removerMedico(crm))
-            System.out.println("Médico removido com sucesso.");
+        if (gh.removerMedico(crm));
         else
             System.out.println("Médico com CRM " + crm + " não encontrado.");
     }
