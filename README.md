@@ -13,7 +13,7 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
 - **Nome completo:** Nicolas Thomé Zanin
 - **Matrícula:** 251027076
 - **Curso:** Engenharias/FCTE
-- **Turma:** Turma 6
+- **Turma:** Turma 02
 
 ---
 
@@ -35,7 +35,7 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
 
 
 3. **Estrutura de Pastas:**
-
+```
    --SGHP
       --SRC
          --App (Pacote da classe Main)
@@ -46,7 +46,7 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
          --Util (métodos úteis, persistencia e etc)
          --View (Contém as classes visuais do programa, os menus.)
       --Data (Onde são salvo os dados em CSV)
-
+```
 3. **Versão do JAVA utilizada:**  
    Java 24.0.2
 
@@ -54,7 +54,7 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
 
 ## Vídeo de Demonstração
 
-- [Inserir o link para o vídeo no YouTube/Drive aqui]
+- [[>Vídeo no Youtube<](https://youtu.be/cYnTXQ-vprA)]
 
 ---
 

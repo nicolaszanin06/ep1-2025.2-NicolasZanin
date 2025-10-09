@@ -4,3 +4,4 @@ id;cpfPaciente;crmMedico;dataHora;local;motivo;status;diagnostico;prescricoes
 3;11122233344;CRM003;10-09-2025 11:30;Sala 110;Dor no joelho;REALIZADA;Artrose leve;Condroitina, Fisioterapia
 4;55566677788;CRM004;20-10-2025 13:00;Sala 220;Lesão de pele;AGENDADA;;
 5;99988877766;CRM005;05-09-2025 10:00;Sala 302;Enxaqueca crônica;REALIZADA;Cefaleia tensional;Paracetamol, Repouso
+6;11111111111;CRM007;20-10-2025 15:00;Sala 10;Dor de cabe�a;REALIZADA;Sinusite;Repouso
