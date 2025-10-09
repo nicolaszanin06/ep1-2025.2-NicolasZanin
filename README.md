@@ -64,7 +64,7 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
    ![Menu Principal](prints/MenuPrincipal.png)
 
 2. Cadastro de Médico:  
-   ![Menu de Médicos](prints/MenuDeMedicos.png)
+   ![Menu de Médicos](prints/MenuMedicos.png)
 
 3. Relatório de Consultas:  
    ![Relatório de Consultas](prints/MenuRelatorios.png)
